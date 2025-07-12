@@ -183,7 +183,7 @@
 	add_temp_pass_flags(pass_flags)
 	var/turf/start_turf
 	var/turf/above = SSmapping.get_turf_above(loc)
-	if(LM.target.z > z && istype(above, /turf/open_space))
+	if(LM.target.z > z && istype(above, /turf/open/space))
 		start_turf = above
 	else
 		start_turf = get_step_towards(src, LM.target)

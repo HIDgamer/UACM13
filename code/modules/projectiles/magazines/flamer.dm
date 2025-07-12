@@ -274,16 +274,7 @@
 	custom = TRUE
 	max_rounds = 150
 
-/obj/item/ammo_magazine/flamer_tank/survivor
-	name = "improvised flamer tank"
-	desc = "A repurposed tank from heavy welding equipment, holding a flammable mix similar to napalm."
-	icon = 'icons/obj/items/weapons/guns/ammo_by_faction/colony/flamers.dmi'
-	icon_state = "flamer_fuel"
-	gun_type = /obj/item/weapon/gun/flamer/survivor
-	stripe_icon = FALSE
 
-/obj/item/ammo_magazine/flamer_tank/survivor/empty
-	flamer_chem = null
 
 /obj/item/ammo_magazine/flamer_tank/flammenwerfer
 	name = "FW3 heavy incinerator tank"
@@ -303,3 +294,9 @@
 	caliber = "Napalm EX"
 	flamer_chem = "napalmex"
 	stripe_icon = TRUE
+
+
+/obj/item/ammo_magazine/flamer_tank/survivor
+	name = "Survivor fuel canister"
+	desc = "A makeshift fuel canister covered in old duct tape. Looks functional enough."
+	max_rounds = 250

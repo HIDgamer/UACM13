@@ -1298,7 +1298,7 @@
 			var/obj/structure/machinery/computer/shuttle_control/C = SSticker.mode.active_lz
 			if(!C) //no LZ selected
 				hud_used.locate_leader.icon_state = "trackoff"
-			else if(!SSmapping.same_z_map(src.z, C.z) || get_dist(src,C) < 1)
+			else if(get_dist(src,C) < 1)
 				hud_used.locate_leader.icon_state = "trackondirect_lz"
 			else
 				hud_used.locate_leader.setDir(Get_Compass_Dir(src,C))
@@ -1350,7 +1350,7 @@
 		if(exterior)
 			tracking_atom = exterior
 
-	if(!SSmapping.same_z_map(z, tracking_atom.z) || get_dist(src, tracking_atom) < 1 || src == tracking_atom)
+	if(get_dist(src, tracking_atom) < 1 || src == tracking_atom)
 		hud_used.locate_leader.icon_state = "trackondirect[tracking_suffix]"
 	else
 		hud_used.locate_leader.setDir(Get_Compass_Dir(src, tracking_atom))

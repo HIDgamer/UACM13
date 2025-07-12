@@ -61,6 +61,16 @@
 	/// Base color of the bracer. (DEFAULT OR WHITE)
 	var/bracer_color = SIMI_COLOR_DEFAULT
 
+	/// Motion detector for utility ability
+	var/obj/item/device/motiondetector/integrated/motion_detector
+	var/motion_detector_active = FALSE
+	var/motion_detector_recycle = 120
+	var/motion_detector_cooldown = 2
+	var/motion_detector_cost = 2
+
+	/// Binoculars for ocular designator
+	var/obj/item/device/binoculars/binos
+
 	// Capability states used in FORITIFY mode.
 	var/saved_melee_allowed = TRUE
 	var/saved_throw_allowed = TRUE
@@ -84,11 +94,19 @@
 	internal_transmitter.networks_transmit = list(faction)
 	RegisterSignal(internal_transmitter, COMSIG_TRANSMITTER_UPDATE_ICON, PROC_REF(check_for_ringing))
 
+	motion_detector = new(src)
+	motion_detector.iff_signal = faction
+
+	binos = new(src)
+	RegisterSignal(binos, COMSIG_ITEM_DROPPED, PROC_REF(return_binos))
+
 /obj/item/clothing/gloves/synth/Destroy()
 	. = ..()
 	QDEL_NULL_LIST(actions_list_actions)
 	QDEL_NULL(internal_transmitter)
 	QDEL_NULL(underglove)
+	QDEL_NULL(motion_detector)
+	QDEL_NULL(binos)
 
 /obj/item/clothing/gloves/synth/examine(mob/user)
 	..()
@@ -134,6 +152,10 @@
 		internal_transmitter.phone_id = "[src]"
 		internal_transmitter.enabled = FALSE
 
+	if(motion_detector && motion_detector_active)
+		toggle_motion_detector(user)
+	return_binos(user)
+
 	wearer = null
 	return ..()
 
@@ -153,6 +175,9 @@
 			add_fingerprint(usr)
 
 /obj/item/clothing/gloves/synth/attackby(obj/item/attacker, mob/living/carbon/human/user)
+	if(attacker == binos)
+		return_binos(user)
+		return
 	if((istype(attacker, /obj/item/clothing/gloves)) && !(attacker.flags_item & ITEM_PREDATOR))
 		if(underglove)
 			to_chat(user, SPAN_WARNING("[src] is already attached to [underglove], remove them first."))
@@ -421,6 +446,64 @@
 	if(report_charge)
 		to_chat(user, SPAN_WARNING("\The [src]'s charge now reads: <b>[battery_charge]/[battery_charge_max]</b>."))
 	update_icon()
+
+/obj/item/clothing/gloves/synth/proc/toggle_motion_detector(mob/user)
+	if(!motion_detector)
+		to_chat(user, SPAN_WARNING("No motion detector located!"))
+		return FALSE
+	to_chat(user, SPAN_NOTICE("You [motion_detector_active? "<B>disable</b>" : "<B>enable</b>"] \the [src]'s motion detector."))
+	if(COOLDOWN_FINISHED(src, sound_cooldown))
+		playsound(src, 'sound/machines/terminal_prompt_deny.ogg', 35, TRUE)
+		COOLDOWN_START(src, sound_cooldown, 5 SECONDS)
+	motion_detector_active = !motion_detector_active
+	var/datum/action/human_action/synth_bracer/motion_detector/TMD = locate(/datum/action/human_action/synth_bracer/motion_detector) in actions_list_actions
+	TMD.update_icon()
+	update_icon()
+
+	if(!motion_detector_active)
+		STOP_PROCESSING(SSobj, src)
+	else
+		START_PROCESSING(SSobj, src)
+	return TRUE
+
+/obj/item/clothing/gloves/synth/proc/deploy_binos(mob/M)
+	if(!M.put_in_active_hand(binos))
+		M.put_in_inactive_hand(binos)
+
+/obj/item/clothing/gloves/synth/proc/return_binos()
+	if(QDELETED(binos))
+		binos = null
+		return
+
+	if(ismob(binos.loc))
+		var/mob/M = binos.loc
+		M.drop_inv_item_to_loc(binos, src)
+	else
+		binos.forceMove(src)
+
+/obj/item/clothing/gloves/synth/process()
+	if(!ishuman(loc))
+		STOP_PROCESSING(SSobj, src)
+		return
+	if(!motion_detector_active)
+		STOP_PROCESSING(SSobj, src)
+		return
+	if(battery_charge <= 1)
+		motion_detector_active = FALSE
+		STOP_PROCESSING(SSobj, src)
+		return
+	if(motion_detector_active)
+		motion_detector_recycle--
+		if(!motion_detector_recycle)
+			motion_detector_recycle = initial(motion_detector_recycle)
+			motion_detector.refresh_blip_pool()
+
+		motion_detector_cooldown--
+		if(motion_detector_cooldown)
+			return
+		motion_detector_cooldown = initial(motion_detector_cooldown)
+		motion_detector.scan()
+		drain_charge(loc, 2, FALSE)
 
 //#############################
 //##### ACTION HANDLING #######

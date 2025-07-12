@@ -287,11 +287,8 @@
 		return FALSE
 	var/turf/target_turf = get_turf(A)
 
-	if(!SSmapping.same_z_map(X.loc.z, target_turf.loc.z))
+	if(get_dist(X.loc, target_turf) > X.caste.max_build_dist)
 		to_chat(X, SPAN_XENOWARNING("Our mind cannot reach that far."))
-		return
-	if(!X.hive.allow_no_queen_actions && (!X.hive.living_xeno_queen || !SSmapping.same_z_map(X.hive.living_xeno_queen.z, X.z)))
-		to_chat(X, SPAN_XENOWARNING("Our psychic link is gone, the Queen is either dead or too far away!"))
 		return
 
 	var/tally = 0
@@ -810,12 +807,6 @@
 
 	if(QDELETED(target_turf))
 		to_chat(xeno, SPAN_WARNING("We cannot build here!"))
-		qdel(structure_template)
-		return FALSE
-
-	var/queen_on_zlevel = !X.hive.living_xeno_queen || X.hive.living_xeno_queen.z == T.z
-	if(!queen_on_zlevel)
-		to_chat(xeno, SPAN_WARNING("Our link to the Queen is too weak here. She is on another world."))
 		qdel(structure_template)
 		return FALSE
 

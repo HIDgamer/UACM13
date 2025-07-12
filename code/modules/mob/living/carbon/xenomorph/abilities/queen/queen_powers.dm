@@ -214,10 +214,6 @@
 		to_chat(queen, SPAN_WARNING("You must select a valid turf to heal around."))
 		return
 
-	if(X.loc.z != T.loc.z)
-		to_chat(X, SPAN_XENOWARNING("You are too far away to do this here."))
-		return
-
 	if(!check_and_use_plasma_owner())
 		return
 
@@ -725,7 +721,7 @@
 
 	var/turf/turf_to_get = get_turf(target)
 
-	if(!turf_to_get || turf_to_get.is_weedable < FULLY_WEEDABLE || turf_to_get.density || !SSmapping.same_z_map(turf_to_get.z, xeno.z))
+	if(!turf_to_get || turf_to_get.is_weedable < FULLY_WEEDABLE || turf_to_get.density)
 		to_chat(xeno, SPAN_XENOWARNING("You can't do that here."))
 		return
 
@@ -1013,4 +1009,3 @@
 	// We don't test or apply the cooldown here because the proc does it since verbs can activate it too
 	xeno.hive_message()
 	return ..()
-

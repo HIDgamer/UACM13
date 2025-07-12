@@ -267,19 +267,16 @@
 		return //nothing's changed
 
 	var/list/datum/static_lighting_corner/corners = list()
-	if (source_turf)
-		var/oldlum = source_turf.luminosity
-		source_turf.luminosity = ceil(light_range)
-		for(var/turf/T in view(ceil(light_range), source_turf))
-			if(!IS_OPAQUE_TURF(T))
-				if (!T.lighting_corners_initialised)
-					T.static_generate_missing_corners()
-				corners[T.lighting_corner_NE] = 0
-				corners[T.lighting_corner_SE] = 0
-				corners[T.lighting_corner_SW] = 0
-				corners[T.lighting_corner_NW] = 0
-			turfs += T
-		source_turf.luminosity = oldlum
+	var/oldlum = source_turf.luminosity
+	source_turf.luminosity = ceil(light_range)
+	for(var/turf/T in view(ceil(light_range), source_turf))
+		if (!T.lighting_corners_initialised)
+			T.static_generate_missing_corners()
+		corners[T.lighting_corner_NE] = 0
+		corners[T.lighting_corner_SE] = 0
+		corners[T.lighting_corner_SW] = 0
+		corners[T.lighting_corner_NW] = 0
+	source_turf.luminosity = oldlum
 
 	SETUP_CORNERS_CACHE(src)
 

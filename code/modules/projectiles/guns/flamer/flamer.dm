@@ -541,6 +541,15 @@
 	. = ..()
 	set_fire_delay(FIRE_DELAY_TIER_7)
 
+/obj/item/weapon/gun/flamer/flammenwerfer3
+	name = "\improper Flammenwerfer 3 Heavy Incineration Unit"
+	desc = "A heavy, high capacity incineration unit designed by Weyland-Yutani. This one has a blue, heat-resistant Weyland-Yutani logo on it."
+	icon = 'icons/obj/items/weapons/guns/guns_by_faction/WY/flamers.dmi'
+	icon_state = "fl3"
+	item_state = "fl3"
+	current_mag = /obj/item/ammo_magazine/flamer_tank/flammenwerfer
+	max_range = 8
+
 /obj/flamer_fire
 	name = "fire"
 	desc = "Ouch!"

@@ -70,9 +70,6 @@
 	overmind_mob.armor_deflection = 45
 	overmind_mob.aura_strength = 6
 
-	ADD_TRAIT(overmind_mob, TRAIT_IMMOBILIZED, OVERMIND_TRAIT)
-	ADD_TRAIT(overmind_mob, TRAIT_PATHOGEN_OVERMIND, OVERMIND_TRAIT)
-	ADD_TRAIT(overmind_mob, TRAIT_UNDENSE, OVERMIND_TRAIT)
 	overmind_mob.set_body_position(STANDING_UP)
 	overmind_mob.set_resting(FALSE)
 
@@ -132,10 +129,6 @@
 	if(overmind_timer)
 		deltimer(overmind_timer)
 	overmind_timer = null
-
-	REMOVE_TRAIT(overmind_mob, TRAIT_IMMOBILIZED, OVERMIND_TRAIT)
-	REMOVE_TRAIT(overmind_mob, TRAIT_PATHOGEN_OVERMIND, OVERMIND_TRAIT)
-	REMOVE_TRAIT(overmind_mob, TRAIT_UNDENSE, OVERMIND_TRAIT)
 
 	overmind_mob.generate_name()
 	overmind_mob.plasma_gain = overmind_stored_stuff["plasmagen"]

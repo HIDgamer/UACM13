@@ -281,13 +281,7 @@
 			if(!mover.Collide(A))
 				return FALSE
 
-	if(mover.move_intentionally && istype(src, /turf/open_space) && istype(mover,/mob/living))
-		var/turf/open_space/space = src
-		var/mob/living/climber = mover
-		if(climber.a_intent == INTENT_HARM)
-			return TRUE
-		space.climb_down(climber)
-		return FALSE
+
 
 
 	return TRUE //Nothing found to block so return success!
@@ -851,3 +845,14 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 /turf/proc/remove_flag(flag)
 	turf_flags &= ~flag
+
+/turf/proc/static_generate_missing_corners()
+	if(!lighting_corner_NE)
+		lighting_corner_NE = new /datum/static_lighting_corner(x, y, z)
+	if(!lighting_corner_SE)
+		lighting_corner_SE = new /datum/static_lighting_corner(x, y - 1, z)
+	if(!lighting_corner_SW)
+		lighting_corner_SW = new /datum/static_lighting_corner(x - 1, y - 1, z)
+	if(!lighting_corner_NW)
+		lighting_corner_NW = new /datum/static_lighting_corner(x - 1, y, z)
+	lighting_corners_initialised = TRUE

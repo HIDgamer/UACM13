@@ -249,7 +249,7 @@
 		hive.mark_ui.open_mark_menu(src)
 		return FALSE
 
-	if(!SSmapping.same_z_map(z, target_turf.loc.z))
+	if(get_dist(src.loc, target_turf) > src.caste.max_build_dist)
 		to_chat(src, SPAN_XENOWARNING("Our mind cannot reach that far."))
 		return
 

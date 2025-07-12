@@ -175,7 +175,6 @@
 	animate(hiding_human, pixel_x = shift_pixel_x, pixel_y = shift_pixel_y, time = 1)
 	if(direction == NORTH)
 		hiding_human.add_filter("cutout", 1, alpha_mask_filter(icon = icon('icons/effects/effects.dmi', "cutout")))
-	ADD_TRAIT(hiding_human, TRAIT_UNDENSE, WALL_HIDING_TRAIT)
 	RegisterSignal(hiding_human, list(COMSIG_MOVABLE_MOVED, COMSIG_LIVING_SET_BODY_POSITION, COMSIG_MOB_RESISTED, COMSIG_MOB_ANIMATING), PROC_REF(unhide_human), hiding_human)
 	..()
 
@@ -184,7 +183,6 @@
 	if(!to_unhide)
 		return
 
-	REMOVE_TRAIT(to_unhide, TRAIT_UNDENSE, WALL_HIDING_TRAIT)
 	to_unhide.pixel_x = initial(to_unhide.pixel_x)
 	to_unhide.pixel_y = initial(to_unhide.pixel_y)
 	to_unhide.layer = initial(to_unhide.layer)

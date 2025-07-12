@@ -112,7 +112,7 @@
 						phero_center = queen.observed_xeno
 					if(!phero_center || !phero_center.loc)
 						return
-					if(phero_center.loc.z == Q.loc.z)//Only same Z-level
+					if(phero_center.loc.z == queen.loc.z)//Only same Z-level
 						use_current_aura = TRUE
 						aura_center = phero_center
 				else
@@ -126,9 +126,9 @@
 				if(Z.ignores_pheromones || Z.ignore_aura == current_aura || Z.ignore_aura == leader_current_aura || Z.z != z || get_dist(aura_center, Z) > floor(6 + aura_strength * 2) || !HIVE_ALLIED_TO_HIVE(Z.hivenumber, hivenumber))
 					continue
 				if(use_leader_aura)
-					target.affected_by_pheromones(leader_current_aura, leader_aura_strength)
+					Z.affected_by_pheromones(leader_current_aura, leader_aura_strength)
 				if(use_current_aura)
-					target.affected_by_pheromones(current_aura, aura_strength)
+					Z.affected_by_pheromones(current_aura, aura_strength)
 
 	if(frenzy_aura != frenzy_new || warding_aura != warding_new || recovery_aura != recovery_new)
 		frenzy_aura = frenzy_new
@@ -411,7 +411,7 @@ Make sure their actual health updates immediately.*/
 			queen_locator()
 		return
 
-	if(!SSmapping.same_z_map(tracking_atom.loc.z, loc.z) && SSinterior.in_interior(tracking_atom))
+	if(tracking_atom.loc.z != loc.z && SSinterior.in_interior(tracking_atom))
 		var/datum/interior/interior = SSinterior.get_interior_by_coords(tracking_atom.x, tracking_atom.y, tracking_atom.z)
 		var/atom/exterior = interior.exterior
 		if(exterior)
@@ -419,7 +419,7 @@ Make sure their actual health updates immediately.*/
 
 	locator.overlays.Cut()
 
-	if( !SSmapping.same_z_map(tracking_atom.loc.z, loc.z) || get_dist(src, tracking_atom) < 1 || src == tracking_atom)
+	if( tracking_atom.loc.z != loc.z || get_dist(src, tracking_atom) < 1 || src == tracking_atom)
 		locator.icon_state = "trackondirect"
 	else
 		var/area/our_area = get_area(loc)
@@ -447,7 +447,7 @@ Make sure their actual health updates immediately.*/
 
 	ML.overlays.Cut()
 
-	if(!SSmapping.same_z_map(tracked_marker_z_level, loc.z)) //different z levels
+	if(tracked_marker_z_level != loc.z) //different z levels
 		ML.overlays |= image(tracked_marker.seenMeaning, "pixel_y" = 0)
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "center_glow")
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "z_direction")
