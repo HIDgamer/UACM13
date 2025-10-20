@@ -210,7 +210,6 @@
 
 /turf/open/floor/plating/almayer/no_build
 	allow_construction = FALSE
-	is_weedable = NOT_WEEDABLE
 
 /turf/open/floor/plating/airless
 	icon_state = "plating"
@@ -315,10 +314,6 @@
 		update_icon()
 	..()
 
-/turf/open/floor/plating/plating_catwalk/no_build
-	allow_construction = FALSE
-	turf_flags = parent_type::turf_flags|TURF_HULL
-
 /turf/open/floor/plating/plating_catwalk/prison
 	icon = 'icons/turf/floors/prison.dmi'
 
@@ -353,11 +348,6 @@
 	name = "catwalk"
 	desc = "Cats really don't like these things."
 	turf_flags = NO_FLAGS // platingdmg && panelscorched icon_state does not exist in this icon
-
-/turf/open/floor/plating/catwalk/Initialize(mapload, ...)
-	ADD_TRAIT(src, TURF_Z_TRANSPARENT_TRAIT, TRAIT_SOURCE_INHERENT)
-
-	. = ..()
 
 /turf/open/floor/almayer
 	icon = 'icons/turf/almayer.dmi'
@@ -2151,8 +2141,6 @@
 	icon_state = "outerhull"
 	name = "hull"
 	turf_flags = TURF_HULL
-	allow_construction = FALSE
-	is_weedable = NOT_WEEDABLE
 
 /turf/open/floor/almayer_hull/outerhull_dir
 	icon_state = "outerhull_dir"
@@ -2177,6 +2165,9 @@
 
 /turf/open/floor/almayer_hull/outerhull_dir/northwest
 	dir = NORTHWEST
+
+
+
 
 
 

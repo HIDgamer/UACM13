@@ -115,7 +115,7 @@
 		to_chat(user, SPAN_WARNING("Its already destroyed!"))
 		return XENO_NO_DELAY_ACTION
 
-	if(explo_proof)
+	if(stat & explo_proof)
 		to_chat(user, SPAN_WARNING("Its too strong for us!"))
 		return XENO_NO_DELAY_ACTION
 
@@ -232,14 +232,6 @@
 /obj/structure/platform/metal/stair_cut/shiva_right
 	icon_state = "shiva_stair_alt"
 
-/obj/structure/platform/metal/stair_cut/almayer_smooth_left
-	icon_state = "platform_sm_stair"
-	explo_proof = TRUE
-
-/obj/structure/platform/metal/stair_cut/almayer_smooth_right
-	icon_state = "platform_sm_stair_alt"
-	explo_proof = TRUE
-
 //------------------------------//
 //    Stone Stairs Platforms    //
 //------------------------------//
@@ -299,18 +291,6 @@
 /obj/structure/platform/metal/almayer/west
 	dir = WEST
 
-/obj/structure/platform/metal/almayer_smooth
-	icon_state = "platform_sm"
-	explo_proof = TRUE
-
-/obj/structure/platform/metal/almayer_smooth/north
-	dir = NORTH
-
-/obj/structure/platform/metal/almayer_smooth/east
-	dir = EAST
-
-/obj/structure/platform/metal/almayer_smooth/west
-	dir = WEST
 
 /obj/structure/platform/metal/kutjevo
 	icon_state = "kutjevo_platform"
@@ -485,30 +465,6 @@
 /obj/structure/platform_decoration/metal/almayer/southwest
 	dir = SOUTHWEST
 
-/obj/structure/platform_decoration/metal/almayer_smooth
-	icon_state = "platform_sm_deco"
-	explo_proof = TRUE
-
-/obj/structure/platform_decoration/metal/almayer_smooth/north
-	dir = NORTH
-
-/obj/structure/platform_decoration/metal/almayer_smooth/east
-	dir = EAST
-
-/obj/structure/platform_decoration/metal/almayer_smooth/west
-	dir = WEST
-
-/obj/structure/platform_decoration/metal/almayer_smooth/northeast
-	dir = NORTHEAST
-
-/obj/structure/platform_decoration/metal/almayer_smooth/northwest
-	dir = NORTHWEST
-
-/obj/structure/platform_decoration/metal/almayer_smooth/southeast
-	dir = SOUTHEAST
-
-/obj/structure/platform_decoration/metal/almayer_smooth/southwest
-	dir = SOUTHWEST
 
 /obj/structure/platform_decoration/metal/kutjevo
 	name = "raised metal corner"

@@ -26,7 +26,6 @@
 	GLOB.living_mob_list -= src
 	cleanup_status_effects()
 	pipes_shown = null
-	QDEL_NULL(observed_atom)
 
 	. = ..()
 
@@ -703,7 +702,3 @@
 		if(!HAS_TRAIT(src, TRAIT_HAULED))
 			return
 	return ..()
-
-/mob/living/onZImpact(turf/impact_turf, height)
-	. = ..()
-	impact_turf.z_impact(src, height)

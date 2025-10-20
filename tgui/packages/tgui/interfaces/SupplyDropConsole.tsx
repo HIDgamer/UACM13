@@ -88,16 +88,6 @@ export const SupplyDropConsole = () => {
                 onChange={(value) => act('set_y', { set_y: `${value}` })}
               />
             </LabeledList.Item>
-            <LabeledList.Item label="Height">
-              <NumberInput
-                width="4em"
-                step={1}
-                minValue={-Infinity}
-                maxValue={Infinity}
-                value={data.z_offset}
-                onChange={(value) => act('set_z', { set_z: `${value}` })}
-              />
-            </LabeledList.Item>
           </LabeledList>
           <Divider />
           <Section

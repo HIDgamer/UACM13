@@ -655,7 +655,6 @@ const SupplyDrop = (props) => {
 
   const [supplyX, setSupplyX] = useSharedState('supplyx', 0);
   const [supplyY, setSupplyY] = useSharedState('supply', 0);
-  const [supplyZ, setSupplyZ] = useSharedState('supplyz', 0);
 
   let crate_status = 'Crate Loaded';
   let crate_color = 'green';
@@ -692,16 +691,6 @@ const SupplyDrop = (props) => {
                 width="75px"
               />
             </LabeledControls.Item>
-            <LabeledControls.Item label="HEIGHT">
-              <NumberInput
-                step={1}
-                value={supplyZ}
-                minValue={-Infinity}
-                maxValue={Infinity}
-                onChange={(value) => setSupplyZ(value)}
-                width="75px"
-              />
-            </LabeledControls.Item>
             <LabeledControls.Item label="STATUS">
               <Box color={crate_color} bold>
                 {crate_status}
@@ -714,9 +703,7 @@ const SupplyDrop = (props) => {
               width="100%"
               icon="box"
               color="yellow"
-              onClick={() =>
-                act('dropsupply', { x: supplyX, y: supplyY, z: supplyZ })
-              }
+              onClick={() => act('dropsupply', { x: supplyX, y: supplyY })}
             >
               Launch
             </Button>
@@ -726,7 +713,7 @@ const SupplyDrop = (props) => {
               icon="save"
               color="yellow"
               onClick={() =>
-                act('save_coordinates', { x: supplyX, y: supplyY, z: supplyZ })
+                act('save_coordinates', { x: supplyX, y: supplyY })
               }
             >
               Save
@@ -748,7 +735,6 @@ const OrbitalBombardment = (props) => {
 
   const [OBX, setOBX] = useSharedState('obx', 0);
   const [OBY, setOBY] = useSharedState('oby', 0);
-  const [OBZ, setOBZ] = useSharedState('obz', 0);
 
   let ob_status = 'Ready';
   let ob_color = 'green';
@@ -788,16 +774,6 @@ const OrbitalBombardment = (props) => {
                 width="75px"
               />
             </LabeledControls.Item>
-            <LabeledControls.Item label="HEIGHT">
-              <NumberInput
-                step={1}
-                value={OBZ}
-                minValue={-Infinity}
-                maxValue={Infinity}
-                onChange={(value) => setOBZ(value)}
-                width="75px"
-              />
-            </LabeledControls.Item>
 
             <LabeledControls.Item label="STATUS">
               <Box color={ob_color} bold>
@@ -809,9 +785,9 @@ const OrbitalBombardment = (props) => {
             <Button
               fontSize="20px"
               width="100%"
-              icon={data.ob_safety ? 'ban' : 'bomb'}
-              color={data.ob_safety ? 'transperant' : 'red'}
-              onClick={() => act('dropbomb', { x: OBX, y: OBY, z: OBZ })}
+              icon="bomb"
+              color="red"
+              onClick={() => act('dropbomb', { x: OBX, y: OBY })}
             >
               Fire
             </Button>
@@ -820,9 +796,7 @@ const OrbitalBombardment = (props) => {
               width="100%"
               icon="save"
               color="yellow"
-              onClick={() =>
-                act('save_coordinates', { x: OBX, y: OBY, z: OBZ })
-              }
+              onClick={() => act('save_coordinates', { x: OBX, y: OBY })}
             >
               Save
             </Button>
@@ -843,22 +817,18 @@ const SavedCoordinates = (props) => {
 
   const [OBX, setOBX] = useSharedState('obx', 0);
   const [OBY, setOBY] = useSharedState('oby', 0);
-  const [OBZ, setOBZ] = useSharedState('obz', 0);
   const [supplyX, setSupplyX] = useSharedState('supplyx', 0);
   const [supplyY, setSupplyY] = useSharedState('supply', 0);
-  const [supplyZ, setSupplyZ] = useSharedState('supplyz', 0);
 
   const { forOB, forSupply } = props;
 
-  let transferCoords = (x, y, z) => {
+  let transferCoords = (x, y) => {
     if (forSupply) {
       setSupplyX(x);
       setSupplyY(y);
-      setSupplyZ(z);
     } else if (forOB) {
       setOBX(x);
       setOBY(y);
-      setOBZ(z);
     }
   };
 
@@ -875,9 +845,6 @@ const SavedCoordinates = (props) => {
           <Table.Cell p="5px" collapsing>
             LAT.
           </Table.Cell>
-          <Table.Cell p="5px" collapsing>
-            HEIGHT
-          </Table.Cell>
           <Table.Cell p="5px">COMMENT</Table.Cell>
           <Table.Cell p="5px" collapsing />
         </Table.Row>
@@ -885,7 +852,6 @@ const SavedCoordinates = (props) => {
           <Table.Row key={index}>
             <Table.Cell p="6px">{coords.x}</Table.Cell>
             <Table.Cell p="5px">{coords.y}</Table.Cell>
-            <Table.Cell p="4px">{coords.z}</Table.Cell>
             <Table.Cell p="5px">
               <Input
                 width="100%"
@@ -902,7 +868,7 @@ const SavedCoordinates = (props) => {
               <Button
                 color="yellow"
                 icon="arrow-left"
-                onClick={() => transferCoords(coords.x, coords.y, coords.z)}
+                onClick={() => transferCoords(coords.x, coords.y)}
               />
             </Table.Cell>
           </Table.Row>
