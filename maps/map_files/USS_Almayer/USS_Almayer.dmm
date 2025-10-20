@@ -21835,6 +21835,7 @@
 /obj/structure/machinery/light{
 	dir = 8
 	},
+/obj/structure/machinery/power/power_generator/reactor/rostock,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/engineering/lower/engine_core)
 "cle" = (
@@ -33172,6 +33173,7 @@
 /obj/structure/machinery/status_display{
 	pixel_y = 30
 	},
+/obj/structure/machinery/power/power_generator/reactor/rostock,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/engineering/lower/engine_core)
 "hdd" = (
@@ -33633,6 +33635,7 @@
 /turf/open/floor/almayer/red/southeast,
 /area/almayer/lifeboat_pumps/north1)
 "hmv" = (
+/obj/structure/machinery/power/power_generator/reactor/rostock,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/engineering/lower/engine_core)
 "hmy" = (
@@ -47464,6 +47467,7 @@
 	pixel_x = 8;
 	pixel_y = -32
 	},
+/obj/structure/machinery/power/power_generator/reactor/rostock,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/engineering/lower/engine_core)
 "nkc" = (
@@ -52735,6 +52739,7 @@
 	pixel_x = 8;
 	pixel_y = 32
 	},
+/obj/structure/machinery/power/power_generator/reactor/rostock,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/engineering/lower/engine_core)
 "pvJ" = (
@@ -69803,6 +69808,7 @@
 	icon_state = "S";
 	pixel_y = 0
 	},
+/obj/structure/machinery/cm_vending/clothing/marine/snowflake,
 /turf/open/floor/almayer/plate,
 /area/almayer/living/synthcloset)
 "wvX" = (

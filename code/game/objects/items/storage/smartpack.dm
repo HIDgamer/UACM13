@@ -135,7 +135,7 @@
 	else
 		to_chat(M, SPAN_DANGER("[name] beeps, \"Unathorized user!\""))
 
-	..()
+	return ..()
 
 /obj/item/storage/backpack/marine/smartpack/dropped(mob/living/M)
 	for(var/datum/action/human_action/smartpack/S in M.actions)
