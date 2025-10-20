@@ -68,27 +68,17 @@
 		return
 
 	last_use = world.time
+	Spray_at(A, user)
 
-	if(Spray_at(A, user))
-		playsound(src.loc, 'sound/effects/spray2.ogg', 25, 1, 3)
+	playsound(src.loc, 'sound/effects/spray2.ogg', 25, 1, 3)
 
 /obj/item/reagent_container/spray/proc/Spray_at(atom/A, mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/human_user = user
-		if(!human_user.allow_gun_usage && reagents.contains_harmful_substances())
-			to_chat(user, SPAN_WARNING("Your programming prevents you from using this!"))
-			return FALSE
-		if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/ceasefire))
-			to_chat(user, SPAN_WARNING("You will not break the ceasefire by doing that!"))
-			return FALSE
-
 	var/obj/effect/decal/chempuff/D = new /obj/effect/decal/chempuff(get_turf(src))
 	D.create_reagents(amount_per_transfer_from_this)
 	reagents.trans_to(D, amount_per_transfer_from_this, 1 / spray_size)
 	D.color = mix_color_from_reagents(D.reagents.reagent_list)
 	D.source_user = user
 	D.move_towards(A, 3, spray_size)
-	return TRUE
 
 /obj/item/reagent_container/spray/attack_self(mob/user)
 	..()
