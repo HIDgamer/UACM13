@@ -264,7 +264,7 @@
 
 	var/turf/above = locate(x, y, z+1)
 
-	if(!istransparentturf(above))
+	if(!istype(above, /turf/open_space))
 		to_chat(src, SPAN_WARNING("You cannot look up here."))
 		return
 
