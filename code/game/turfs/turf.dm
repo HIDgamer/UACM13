@@ -134,7 +134,6 @@
 	plane = OPEN_SPACE_PLANE_START
 	vis_flags = VIS_HIDE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	anchored = TRUE
 
 /obj/vis_contents_holder/Initialize(mapload, vis, offset)
 	. = ..()
