@@ -269,44 +269,16 @@
 	var/list/datum/static_lighting_corner/corners = list()
 	if (source_turf)
 		var/oldlum = source_turf.luminosity
-		source_turf.luminosity = CEILING(light_range, 1)
-		for(var/turf/T in view(CEILING(light_range, 1), source_turf))
-			if(IS_OPAQUE_TURF(T))
-				continue
-			if (!T.lighting_corners_initialised)
-				GENERATE_MISSING_CORNERS(T)
-
-			corners[T.lighting_corner_NE] = 0
-			corners[T.lighting_corner_SE] = 0
-			corners[T.lighting_corner_SW] = 0
-			corners[T.lighting_corner_NW] = 0
-
-			var/turf/above = SSmapping.get_turf_above(T)
-
-			while(above && istype(above, /turf/open_space))
-				if (!above.lighting_corners_initialised)
-					GENERATE_MISSING_CORNERS(above)
-				corners[above.lighting_corner_NE] = 0
-				corners[above.lighting_corner_SE] = 0
-				corners[above.lighting_corner_SW] = 0
-				corners[above.lighting_corner_NW] = 0
-
-				above = SSmapping.get_turf_above(above)
-
-			var/turf/below = SSmapping.get_turf_below(T)
-			var/turf/previous = T
-
-			while(below && istype(previous, /turf/open_space))
-				if (!below.lighting_corners_initialised)
-					GENERATE_MISSING_CORNERS(below)
-				corners[below.lighting_corner_NE] = 0
-				corners[below.lighting_corner_SE] = 0
-				corners[below.lighting_corner_SW] = 0
-				corners[below.lighting_corner_NW] = 0
-
-				previous = below
-				below = SSmapping.get_turf_below(below)
-
+		source_turf.luminosity = ceil(light_range)
+		for(var/turf/T in view(ceil(light_range), source_turf))
+			if(!IS_OPAQUE_TURF(T))
+				if (!T.lighting_corners_initialised)
+					T.static_generate_missing_corners()
+				corners[T.lighting_corner_NE] = 0
+				corners[T.lighting_corner_SE] = 0
+				corners[T.lighting_corner_SW] = 0
+				corners[T.lighting_corner_NW] = 0
+			turfs += T
 		source_turf.luminosity = oldlum
 
 	SETUP_CORNERS_CACHE(src)

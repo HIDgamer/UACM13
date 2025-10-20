@@ -210,7 +210,6 @@
 
 /turf/open/floor/plating/almayer/no_build
 	allow_construction = FALSE
-	is_weedable = NOT_WEEDABLE
 
 /turf/open/floor/plating/airless
 	icon_state = "plating"
@@ -2142,8 +2141,6 @@
 	icon_state = "outerhull"
 	name = "hull"
 	turf_flags = TURF_HULL
-	allow_construction = FALSE
-	is_weedable = NOT_WEEDABLE
 
 /turf/open/floor/almayer_hull/outerhull_dir
 	icon_state = "outerhull_dir"
@@ -2168,6 +2165,9 @@
 
 /turf/open/floor/almayer_hull/outerhull_dir/northwest
 	dir = NORTHWEST
+
+
+
 
 
 

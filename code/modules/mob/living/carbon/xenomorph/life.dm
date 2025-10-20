@@ -112,30 +112,18 @@
 						phero_center = queen.observed_xeno
 					if(!phero_center || !phero_center.loc)
 						return
-					if(SSmapping.same_z_map(phero_center.loc.z, queen.loc.z))//Only same map
+					if(phero_center.loc.z == Q.loc.z)//Only same Z-level
 						use_current_aura = TRUE
 						aura_center = phero_center
 				else
 					use_current_aura = TRUE
 
-		if(leader_current_aura && hive && hive.living_xeno_queen && SSmapping.same_z_map(hive.living_xeno_queen.loc.z, loc.z)) //Same map as the Queen!
+		if(leader_current_aura && hive && hive.living_xeno_queen && hive.living_xeno_queen.loc.z == loc.z) //Same Z-level as the Queen!
 			use_leader_aura = TRUE
 
 		if(use_current_aura || use_leader_aura)
-			for(var/mob/living/carbon/xenomorph/target as anything in GLOB.living_xeno_list)
-				if(target.ignores_pheromones)
-					continue
-				if(target.ignore_aura == current_aura)
-					continue
-				if(target.ignore_aura == leader_current_aura)
-					continue
-				if(!SSmapping.same_z_map(target.z, z))
-					continue
-				if(get_dist(aura_center, target) > floor(6 + aura_strength * 2))
-					continue
-				if(!HIVE_ALLIED_TO_HIVE(target.hivenumber, hivenumber))
-					continue
-				if(target.banished)
+			for(var/mob/living/carbon/xenomorph/Z as anything in GLOB.living_xeno_list)
+				if(Z.ignores_pheromones || Z.ignore_aura == current_aura || Z.ignore_aura == leader_current_aura || Z.z != z || get_dist(aura_center, Z) > floor(6 + aura_strength * 2) || !HIVE_ALLIED_TO_HIVE(Z.hivenumber, hivenumber))
 					continue
 				if(use_leader_aura)
 					target.affected_by_pheromones(leader_current_aura, leader_aura_strength)
