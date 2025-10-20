@@ -523,6 +523,10 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 	new_human.sec_hud_set_ID()
 	new_human.hud_set_squad()
 
+	// comm_title is probably available at this point.
+	var/datum/highlight_keywords_payload/payload = new(new_mob)
+	new_mob.client.tgui_panel.window.send_message("settings/updateHighlightKeywords", payload.to_list())
+
 	SEND_SIGNAL(new_human, COMSIG_POST_SPAWN_UPDATE)
 	SSround_recording.recorder.track_player(new_human)
 
@@ -646,6 +650,24 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 			M = /mob/living/carbon/xenomorph/hellhound
 		if(XENO_CASTE_KING)
 			M = /mob/living/carbon/xenomorph/king
+		if(PATHOGEN_CREATURE_BURSTER)
+			M = /mob/living/carbon/xenomorph/bloodburster
+		if(PATHOGEN_CREATURE_POPPER)
+			M = /mob/living/carbon/xenomorph/popper
+		if(PATHOGEN_CREATURE_SPRINTER)
+			M = /mob/living/carbon/xenomorph/sprinter
+		if(PATHOGEN_CREATURE_NEOMORPH)
+			M = /mob/living/carbon/xenomorph/neomorph
+		if(PATHOGEN_CREATURE_BLIGHT)
+			M = /mob/living/carbon/xenomorph/blight
+		if(PATHOGEN_CREATURE_VENATOR)
+			M = /mob/living/carbon/xenomorph/venator
+		if(PATHOGEN_CREATURE_BRUTE)
+			M = /mob/living/carbon/xenomorph/brute
+		if(PATHOGEN_CREATURE_MATRIARCH)
+			M = /mob/living/carbon/xenomorph/matriarch
+		if(PATHOGEN_CREATURE_OVERMIND)
+			M = /mob/living/carbon/xenomorph/overmind
 	return M
 
 

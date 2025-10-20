@@ -38,17 +38,20 @@
 /mob/living/carbon/xenomorph/proc/update_progression()
 	if(isnull(hive))
 		return
+	if(!caste)
+		return
+
 	var/progress_amount = 1
 	if(SSxevolution)
 		progress_amount = SSxevolution.get_evolution_boost_power(hive.hivenumber)
-	var/ovipositor_check = (hive.allow_no_queen_evo || hive.evolution_without_ovipositor || (hive.living_xeno_queen && hive.living_xeno_queen.ovipositor))
-	if(caste && caste.evolution_allowed && (ovipositor_check || caste?.evolve_without_queen))
+	var/ovipositor_check = hive.allow_no_queen_evo || hive.evolution_without_ovipositor || (hive.living_xeno_queen && hive.living_xeno_queen.ovipositor)
+	if(caste.evolution_allowed && (ovipositor_check || caste.evolve_without_queen))
 		if(evolution_stored >= evolution_threshold)
 			if(!got_evolution_message)
 				evolve_message()
 				got_evolution_message = TRUE
 
-			if(ROUND_TIME < XENO_ROUNDSTART_PROGRESS_TIME_2)
+			if(ROUND_TIME < XENO_ROUNDSTART_BOOSTED_EVO_TIME)
 				evolution_stored += progress_amount
 				return
 
@@ -584,6 +587,6 @@ Make sure their actual health updates immediately.*/
 		return TRUE //weeds, yes!
 	if(need_weeds)
 		return FALSE //needs weeds, doesn't have any
-	if(hive && hive.living_xeno_queen && !is_mainship_level(hive.living_xeno_queen.loc.z) && is_mainship_level(loc.z))
+	if((hive && !hive.allow_no_queen_actions) && hive.living_xeno_queen && (!is_mainship_level(hive.living_xeno_queen.loc.z) && is_mainship_level(loc.z)))
 		return FALSE //We are on the ship, but the Queen isn't
 	return TRUE //we have off-weed healing, and either we're on Almayer with the Queen, or we're on non-Almayer, or the Queen is dead, good enough!

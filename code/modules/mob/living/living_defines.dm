@@ -55,7 +55,6 @@
 	var/fire_stacks = 0 //Tracks how many stacks of fire we have on, max is
 	var/datum/reagent/fire_reagent
 
-	var/is_being_hugged = 0 //Is there a hugger humping our face?
 	var/chestburst = 0 // 0: normal, 1: bursting, 2: bursted.
 	var/first_xeno = FALSE //Are they the first wave of infected?
 	var/in_stasis = FALSE //Is the mob in stasis bag?
@@ -137,6 +136,7 @@
 
 	/// icon for weed_food states
 	var/weed_food_icon = 'icons/mob/xenos/weeds.dmi'
+	var/mycelium_food_icon = 'icons/mob/pathogen/pathogen_weeds.dmi'
 	/// icon_states for weed_food (needs to be the same length as weed_food_states_flipped)
 	var/list/weed_food_states = list("human_1","human_2","human_3","human_4","human_5")
 	/// flipped icon_states for weed_food (needs to be the same length as weed_food_states)

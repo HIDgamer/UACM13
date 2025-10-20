@@ -21,7 +21,7 @@
 
 		if(status_flags & XENO_HOST)
 			msg += "This creature is impregnated.\n"
-		else if(chestburst == 2)
+		else if(chestburst >= 2)
 			msg += "A larva escaped from this creature.\n"
 		if(istype(wear_mask, /obj/item/clothing/mask/facehugger))
 			msg += "It has a little one on its face.\n"
@@ -75,7 +75,7 @@
 	var/rank_display = get_paygrades(id_paygrade, FALSE, gender)
 	var/msg = "<span class='info'>\nThis is "
 
-	if(skipjumpsuit && skipface) //big suits/masks/helmets make it hard to tell their gender
+	if(skipjumpsuit && skipface || gender == PLURAL) //big suits/masks/helmets make it hard to tell their gender
 		t_He = "They"
 		t_his = "their"
 		t_him = "them"
@@ -470,6 +470,8 @@
 
 	if(chestburst == 2)
 		msg += SPAN_WARNING(SPAN_BOLD("[t_He] has a giant hole in [t_his] chest!\n"))
+	else if(chestburst == 3)
+		msg += SPAN_WARNING(SPAN_BOLD("[t_He] has a giant hole in [t_his] back!\n"))
 
 	for(var/implant in get_visible_implants())
 		msg += SPAN_WARNING(SPAN_BOLD("[t_He] has \a [implant] sticking out of [t_his] flesh!\n"))
