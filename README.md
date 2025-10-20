@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="#"><img src=".github/assets/logo.png" alt="CM-SS13" align="center"></a>
+	<a href="#"><img src=".github/assets/logo.png" alt="UACM-13" align="center"></a>
 </p>
 <hr />
 
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-	<a href="https://discord.gg/cmss13">
+	<a href="https://discord.gg/jCKAugrWBP">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset=".github/assets/discord-light.png">
 			<source media="(prefers-color-scheme: light)" srcset=".github/assets/discord-dark.png">
@@ -47,11 +47,11 @@
 <hr />
 
 > [!IMPORTANT]
-> CM-SS13 cannot be compiled exclusively using BYOND - **you must use our build tool**.
+> UACM13 cannot be compiled exclusively using BYOND - **you must use our build tool**.
 > Firstly, you need to install [BYOND](https://www.byond.com/download/), and run the `bin/server.cmd` file to start the server.
 > You can learn more in our [Installation Guide](tools/build/README.md). **Building colonialmarines in DreamMaker directly is now deprecated and will cause errors.**
 
-CM-SS13 is a game based on [Space Station 13](https://spacestation13.com), made in [BYOND](https://www.byond.com). CM-SS13 has wildly adapted the SS13 model into a strategic roleplay-based team deathmatch game.
+UACM13 is a game based on [Space Station 13](https://spacestation13.com), made in [BYOND](https://www.byond.com). UACM13 has wildly adapted the SS13 model into a strategic roleplay-based team deathmatch game.
 
 # Useful Links
 
@@ -65,21 +65,21 @@ This guide will get you set up with a Visual Studio Code development environment
 This is our canonical, maintainer-maintained contributing guide, which contains information on our maintainer team structure and pull request rules.
 
 - ## [Code Standards](.github/guides/STANDARDS.md)
-Our standards documents details how to structure your code to comply with CM-SS13 code standards, and provides some information on DreamMaker quirks.
+Our standards documents details how to structure your code to comply with UACM13 code standards, and provides some information on DreamMaker quirks.
 
 - ## [Code Style](.github/guides/STYLES.md)
 The styles document tells you how to style your code to match the rest of the code in our codebase.
 
 - ## [tgui README](tgui/README.md)
-All new interfaces in CM must be created using tgui - this document will help get you set up for tgui development.
+All new interfaces in UACM13 must be created using tgui - this document will help get you set up for tgui development.
 
 # Licenses
 
 ### <a href="LICENSE-AGPLv3.txt"><img src="https://img.shields.io/badge/licence-AGPL_3-red?style=for-the-badge" alt="AGPLv3 license"></a>
-> The code for CM-SS13 is licensed under the [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html). All code is assumed to be licensed under AGPL v3 unless stated otherwise by file header, or this document.
+> The code for UACM13 is licensed under the [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html). All code is assumed to be licensed under AGPL v3 unless stated otherwise by file header, or this document.
 
 ### <a href="LICENSE-CC-BY-SA-3.0.txt"><img src="https://img.shields.io/badge/licence-CC_3.0_BY--SA-lightblue?style=for-the-badge" alt="Creative Commons 3.0 BY-SA"></a>
-> Assets including icons and sound are under the [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated. Authorship for assets including art and sound under the CC BY-SA license is defined as the active development team of CM-SS13 unless stated otherwise (by author of the commit).
+> Assets including icons and sound are under the [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated. Authorship for assets including art and sound under the CC BY-SA license is defined as the active development team of UACM13 unless stated otherwise (by author of the commit).
 
 ### <a href="LICENSE-GPLv3.txt"><img src="https://img.shields.io/badge/licence-GPL_3-orange?style=for-the-badge" alt="GPLv3 license"></a>
 > Commits before [9a001bf520f889b434acd295253a1052420860af on Mon, 14 Sep 2020 09:13:32 +0000](https://github.com/cmss13-devs/cmss13/commit/9a001bf520f889b434acd295253a1052420860af) are assumed to be licensed under [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.html) and can be used in closed source repositories.
