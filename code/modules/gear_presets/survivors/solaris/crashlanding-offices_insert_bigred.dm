@@ -312,13 +312,13 @@
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/gloves/marine/veteran/pmc(new_human), WEAR_HANDS)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/shoes/veteran/pmc/knife(new_human), WEAR_FEET)
 
-	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/smartpack/a1/white(new_human), WEAR_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/roller(new_human), WEAR_IN_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/roller/surgical(new_human), WEAR_IN_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/tool/extinguisher/mini(new_human), WEAR_IN_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/device/defibrillator/upgraded(new_human), WEAR_IN_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/tool/crew_monitor(new_human), WEAR_IN_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/device/defibrillator/synthetic(new_human), WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/smartpack/white/drained, WEAR_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/roller, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/roller/surgical, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/tool/extinguisher/mini, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/device/defibrillator/upgraded, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/tool/crew_monitor, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/device/defibrillator/synthetic, WEAR_IN_BACK)
 
 	new_human.equip_to_slot_or_del(new /obj/item/storage/belt/medical/lifesaver/wy/partial(new_human), WEAR_WAIST)
 
