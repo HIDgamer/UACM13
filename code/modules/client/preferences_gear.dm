@@ -786,11 +786,6 @@ GLOBAL_LIST_EMPTY(roles_with_gear)
 	slot = WEAR_IN_BACK
 	fluff_cost = 4
 
-/datum/gear/weapon/l54_pistol
-	display_name = "L54 Pistol" // TWE service pistol - same stats as the m4a3
-	path = /obj/item/weapon/gun/pistol/l54
-	allowed_origins = USCM_ORIGINS
-
 /datum/gear/weapon/holdout
 	display_name = "W62 'Whisper'" //22LR ratkiller and/or plinker
 	path = /obj/item/storage/box/plinker

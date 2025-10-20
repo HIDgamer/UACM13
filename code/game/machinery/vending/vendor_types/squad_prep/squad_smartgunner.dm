@@ -148,5 +148,3 @@ GLOBAL_LIST_INIT(cm_vending_clothing_smartgun, list(
 	squad_tag = SQUAD_MARINE_4
 	req_access = list(ACCESS_MARINE_SMARTPREP, ACCESS_MARINE_DELTA)
 	headset_type = /obj/item/device/radio/headset/almayer/marine/delta
-
-//------------ESSENTIAL SETS---------------

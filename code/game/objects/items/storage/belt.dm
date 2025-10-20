@@ -2457,76 +2457,6 @@
 	for(var/i in 1 to storage_slots - 1)
 		new /obj/item/ammo_magazine/revolver/webley(src)
 
-/obj/item/storage/belt/gun/iasf_para_belt
-	name = "\improper IASF paratrooper belt"
-	desc = "A sturdy belt fitted with a black leather holster designed for IASF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for IASF airborne forces dropping into hostile territory."
-	icon_state = "iasf_pistol_para"
-	item_state = "iasf_pistol_para"
-	icon = 'icons/obj/items/clothing/belts/belts_by_faction/TWE.dmi'
-	item_icons = list(
-		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/belts_by_faction/TWE.dmi',
-		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/clothing/belts_lefthand.dmi',
-		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/clothing/belts_righthand.dmi'
-	)
-	storage_slots = 8
-	can_hold = list(
-		/obj/item/weapon/gun/revolver,
-		/obj/item/ammo_magazine/revolver,
-		/obj/item/weapon/gun/pistol,
-		/obj/item/ammo_magazine/pistol,
-	)
-	flags_atom = FPRINT|NO_NAME_OVERRIDE|NO_GAMEMODE_SKIN
-	holster_slots = list(
-		"1" = list(
-			"icon_x" = -1,
-			"icon_y" = -3))
-
-/obj/item/storage/belt/gun/iasf_para_belt/full/fill_preset_inventory()
-	handle_item_insertion(new /obj/item/weapon/gun/revolver/m44/custom/webley/IASF_webley())
-	for(var/i in 1 to storage_slots - 1)
-		new /obj/item/ammo_magazine/revolver/webley(src)
-
-/obj/item/storage/belt/gun/iasf_para_belt/webley_near_empty/fill_preset_inventory()
-	handle_item_insertion(new /obj/item/weapon/gun/revolver/m44/custom/webley/IASF_webley())
-	for(var/i = 1 to 3)
-		new /obj/item/ammo_magazine/revolver/webley(src)
-
-/obj/item/storage/belt/gun/iasf_para_belt/custom
-	name = "\improper IASF custom paratrooper belt"
-	desc = "A modified IASF paratrooper belt featuring a black leather holster with gold inlay, a large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for IASF airborne forces dropping into hostile territory."
-	icon_state = "iasf_pistol_para_custom"
-	item_state = "iasf_pistol_para_custom"
-
-/obj/item/storage/belt/gun/iasf_para_belt/custom/full/fill_preset_inventory()
-	handle_item_insertion(new /obj/item/weapon/gun/pistol/l54_custom())
-	for(var/i in 1 to storage_slots - 1)
-		new /obj/item/ammo_magazine/pistol/l54_custom(src)
-
-/obj/item/storage/belt/gun/smartgunner
-	name = "\improper M802 pattern smartgunner sidearm rig"
-	desc = "The M802 is a limited-issue mark of USCM load-bearing equipment, designed to carry smartgun ammunition and a sidearm."
-	icon_state = "sgbelt"
-	holster_slots = list(
-		"1" = list(
-			"icon_x" = 5,
-			"icon_y" = -2))
-	can_hold = list(
-		/obj/item/device/flashlight/flare,
-		/obj/item/weapon/gun/flare,
-		/obj/item/weapon/gun/pistol,
-		/obj/item/weapon/gun/revolver,
-		/obj/item/ammo_magazine/revolver,
-		/obj/item/ammo_magazine/pistol,
-		/obj/item/ammo_magazine/smartgun,
-	)
-	flags_atom = FPRINT // has gamemode skin
-
-/obj/item/storage/belt/gun/smartgunner/full/fill_preset_inventory()
-	handle_item_insertion(new /obj/item/weapon/gun/pistol/m4a3())
-	new /obj/item/ammo_magazine/pistol/hp(src)
-	new /obj/item/ammo_magazine/smartgun(src)
-	new /obj/item/ammo_magazine/smartgun(src)
-
 /obj/item/storage/belt/gun/smartgunner/pmc
 	name = "\improper WY-TM410 pattern 'Dirty' smartgunner sidearm rig"
 	desc = "A special pattern of W-Y made combat belt, designed to carry smartgun ammunition and a sidearm."
@@ -2611,6 +2541,55 @@
 	new /obj/item/ammo_magazine/revolver/mateba/highimpact(src)
 	new /obj/item/ammo_magazine/smartgun(src)
 	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+
+/obj/item/storage/belt/gun/smartgunner
+	name = "\improper M802 pattern smartgunner sidearm rig"
+	desc = "The M802 is a special-issue load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is for the M56B smartgun, allowing easier storage of the weapon's sidearm and ammunition."
+	icon = 'icons/obj/items/clothing/belts/belts_by_map/jungle.dmi'
+	item_icons = list(
+		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/belts_by_map/jungle.dmi',
+		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/items_by_map/snow_lefthand.dmi',
+		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/items_by_map/snow_righthand.dmi'
+	)
+	flags_atom = FPRINT // has gamemode skin
+	storage_slots = 7
+	can_hold = list(
+		/obj/item/weapon/gun/pistol,
+		/obj/item/ammo_magazine/pistol,
+		/obj/item/ammo_magazine/smartgun,
+	)
+	holster_slots = list(
+		"1" = list(
+			"icon_x" = -1,
+			"icon_y" = -3))
+
+/obj/item/storage/belt/gun/smartgunner/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
+	. = ..()
+	switch(SSmapping.configs[GROUND_MAP].camouflage_type)
+		if("jungle")
+			icon = 'icons/obj/items/clothing/belts/belts_by_map/jungle.dmi'
+			item_icons[WEAR_WAIST] = 'icons/mob/humans/onmob/clothing/belts/belts_by_map/jungle.dmi'
+		if("classic")
+			icon = 'icons/obj/items/clothing/belts/belts_by_map/classic.dmi'
+			item_icons[WEAR_WAIST] = 'icons/mob/humans/onmob/clothing/belts/belts_by_map/classic.dmi'
+		if("desert")
+			icon = 'icons/obj/items/clothing/belts/belts_by_map/desert.dmi'
+			item_icons[WEAR_WAIST] = 'icons/mob/humans/onmob/clothing/belts/belts_by_map/desert.dmi'
+		if("snow")
+			icon = 'icons/obj/items/clothing/belts/belts_by_map/snow.dmi'
+			item_icons[WEAR_WAIST] = 'icons/mob/humans/onmob/clothing/belts/belts_by_map/snow.dmi'
+		if("urban")
+			icon = 'icons/obj/items/clothing/belts/belts_by_map/urban.dmi'
+			item_icons[WEAR_WAIST] = 'icons/mob/humans/onmob/clothing/belts/belts_by_map/urban.dmi'
+
+/obj/item/storage/belt/gun/smartgunner/full/fill_preset_inventory()
+	handle_item_insertion(new /obj/item/weapon/gun/pistol/m4a3())
+	new /obj/item/ammo_magazine/pistol(src)
+	new /obj/item/ammo_magazine/pistol(src)
+	new /obj/item/ammo_magazine/pistol(src)
+	new /obj/item/ammo_magazine/pistol(src)
+	new /obj/item/ammo_magazine/pistol(src)
 	new /obj/item/ammo_magazine/smartgun(src)
 
 /obj/item/storage/belt/gun/mortarbelt
@@ -2879,26 +2858,3 @@
 	handle_item_insertion(new /obj/item/weapon/gun/revolver/upp())
 	for(var/i = 1 to storage_slots - 1)
 		new /obj/item/ammo_magazine/revolver/upp(src)
-
-/obj/item/storage/belt/gun/l54
-	name = "\improper pistol belt"
-	desc = "A dark brown leather pistol belt commonly issued to NSPA officers. Although designed for the L54 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TWE law enforcement, military, and security forces."
-	icon_state = "l54_holster"
-	item_state = "l54_holster"
-	icon = 'icons/obj/items/clothing/belts/belts_by_faction/TWE.dmi'
-	item_icons = list(
-		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/belts_by_faction/TWE.dmi',
-		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/clothing/belts_lefthand.dmi',
-		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/clothing/belts_righthand.dmi'
-	)
-	flags_atom = FPRINT|NO_NAME_OVERRIDE|NO_GAMEMODE_SKIN
-	storage_slots = 7
-	can_hold = list(
-		/obj/item/weapon/gun/pistol,
-		/obj/item/ammo_magazine/pistol,
-	)
-
-/obj/item/storage/belt/gun/l54/full/fill_preset_inventory()
-	handle_item_insertion(new /obj/item/weapon/gun/pistol/l54())
-	for(var/i in 1 to storage_slots - 1)
-		new /obj/item/ammo_magazine/pistol/l54(src)

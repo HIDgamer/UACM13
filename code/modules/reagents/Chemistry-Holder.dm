@@ -469,6 +469,15 @@
 
 	return FALSE
 
+/// Checks if the reagents contain any harmful substances (toxicants)
+/datum/reagents/proc/contains_harmful_substances()
+	for(var/datum/reagent/R in reagent_list)
+		for(var/property in R.properties)
+			var/datum/chem_property/P = GLOB.chemical_properties_list[property]
+			if(P && (P.category & PROPERTY_TYPE_TOXICANT))
+				return TRUE
+	return FALSE
+
 /datum/reagents/proc/clear_reagents()
 	for(var/datum/reagent/R in reagent_list)
 		del_reagent(R.id)

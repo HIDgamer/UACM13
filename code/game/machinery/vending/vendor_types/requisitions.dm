@@ -42,7 +42,6 @@
 		list("M2C Heavy Machine Gun", floor(scale * 2), /obj/item/storage/box/guncase/m2c, VENDOR_ITEM_REGULAR),
 		list("M240 Incinerator Unit", floor(scale * 2), /obj/item/storage/box/guncase/flamer, VENDOR_ITEM_REGULAR),
 		list("M85A1 Grenade Launcher", floor(scale * 3), /obj/item/storage/box/guncase/m85a1, VENDOR_ITEM_REGULAR),
-		list("M10 Auto Pistol, Custom", floor(scale * 3), /obj/item/storage/box/guncase/m10_custom_kit, VENDOR_ITEM_REGULAR),
 
 		list("EXPLOSIVES", -1, null, null),
 		list("M15 Fragmentation Grenade", floor(scale * 2), /obj/item/explosive/grenade/high_explosive/m15, VENDOR_ITEM_REGULAR),
@@ -267,8 +266,6 @@
 
 		list("ARMOR-PIERCING AMMUNITION", -1, null, null),
 		list("88 Mod 4 AP Magazine (9mm)", floor(scale * 50), /obj/item/ammo_magazine/pistol/mod88, VENDOR_ITEM_REGULAR),
-		list("M10 AP Magazine (10x20mm-APC)", floor(scale * 14), /obj/item/ammo_magazine/pistol/m10/ap, VENDOR_ITEM_REGULAR),
-		list("M10 AP Extended Magazine (10x20mm-APC)", floor(scale * 6), /obj/item/ammo_magazine/pistol/m10/ap/extended , VENDOR_ITEM_REGULAR),
 		list("M4RA AP Magazine (10x24mm)", floor(scale * 16), /obj/item/ammo_magazine/rifle/m4ra/ap, VENDOR_ITEM_REGULAR),
 		list("M39 AP Magazine (10x20mm)", floor(scale * 12), /obj/item/ammo_magazine/smg/m39/ap, VENDOR_ITEM_REGULAR),
 		list("M41A MK2 AP Magazine (10x24mm)", floor(scale * 10), /obj/item/ammo_magazine/rifle/ap, VENDOR_ITEM_REGULAR),
