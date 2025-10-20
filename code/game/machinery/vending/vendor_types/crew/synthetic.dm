@@ -94,6 +94,8 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 
 		list("SYNTHETIC SPECIALTY EQUIPMENT", 0, null, null, null),
 		list("PK-130 SIMI Wrist-Mounted Computer", 0, /obj/item/clothing/gloves/synth, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+
+		list("SYNTHETIC SPECIALTY BACKPACKS", 0, null, null, null),
 		list("Smartpack, Blue", 0, /obj/item/storage/backpack/marine/smartpack, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 		list("Smartpack, Green", 0, /obj/item/storage/backpack/marine/smartpack/green, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 		list("Smartpack, Tan", 0, /obj/item/storage/backpack/marine/smartpack/tan, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
@@ -367,20 +369,6 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 
 /datum/gear/synthetic/glasses/reagent_scanner
 	path = /obj/item/clothing/glasses/science
-
-
-	list("BACKPACK", 0, null, null, null),
-	list("Backpack, Industrial", 12, /obj/item/storage/backpack/industrial, null, VENDOR_ITEM_REGULAR),
-	list("Backpack, USCM Medical", 12, /obj/item/storage/backpack/marine/medic, null, VENDOR_ITEM_REGULAR),
-	list("Chestrig, Technician", 12, /obj/item/storage/backpack/marine/satchel/tech, null, VENDOR_ITEM_REGULAR),
-	list("Satchel, USCM", 12, /obj/item/storage/backpack/marine/satchel, null, VENDOR_ITEM_REGULAR),
-	list("Satchel, USCM Medical", 12, /obj/item/storage/backpack/marine/satchel/medic, null, VENDOR_ITEM_REGULAR),
-	list("Satchel, Leather", 12, /obj/item/storage/backpack/satchel, null, VENDOR_ITEM_REGULAR),
-	list("Satchel, Medical", 12, /obj/item/storage/backpack/satchel/med, null, VENDOR_ITEM_REGULAR),
-	list("USCM RTO Pack", 12, /obj/item/storage/backpack/marine/satchel/rto, null, VENDOR_ITEM_REGULAR),
-	list("USCM Welderpack", 12, /obj/item/storage/backpack/marine/engineerpack, null, VENDOR_ITEM_REGULAR),
-	list("USCM Weldersatchel", 12, /obj/item/storage/backpack/marine/engineerpack/satchel, null, VENDOR_ITEM_REGULAR),
-	list("USCM Welder Chestrig", 12, /obj/item/storage/backpack/marine/engineerpack/welder_chestrig, null, VENDOR_ITEM_REGULAR),
 
 /datum/gear/synthetic/glasses/sunglasses
 	path = /obj/item/clothing/glasses/sunglasses
@@ -795,6 +783,7 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Autocompressor", 25, /obj/item/clothing/suit/auto_cpr, null, VENDOR_ITEM_REGULAR),
 	list("Compact Defibrillator", 25, /obj/item/device/defibrillator/compact, null, VENDOR_ITEM_REGULAR),
 	list("Portable Dialysis Machine", 25, /obj/item/tool/portadialysis, null, VENDOR_ITEM_REGULAR),
+	list("CPR Buddy 9000", 25, /obj/item/cprbot_item, null, VENDOR_ITEM_REGULAR),
 	list("Crew Monitor", 10, /obj/item/tool/crew_monitor, null, VENDOR_ITEM_REGULAR),
 
 	list("CONSTRUCTION TOOLS", 0, null, null, null),

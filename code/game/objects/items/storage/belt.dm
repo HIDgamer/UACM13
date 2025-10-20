@@ -2543,6 +2543,39 @@
 	new /obj/item/ammo_magazine/smartgun(src)
 	new /obj/item/ammo_magazine/smartgun(src)
 
+/obj/item/storage/belt/gun/smartgunner/marsoc
+	name = "\improper M802 pattern 'Raider' smartgunner sidearm rig"
+	desc = "A special pattern of MARSOC combat belt, designed to carry smartgun ammunition and a sidearm."
+	flags_atom = NO_NAME_OVERRIDE|NO_GAMEMODE_SKIN
+	can_hold = list(
+		/obj/item/weapon/gun/pistol/vp78/whiteout,
+		/obj/item/ammo_magazine/pistol/vp78,
+		/obj/item/ammo_magazine/smartgun,
+	)
+
+/obj/item/storage/belt/gun/smartgunner/marsoc/full/fill_preset_inventory()
+	handle_item_insertion(new /obj/item/weapon/gun/pistol/vp78/whiteout())
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+
+/obj/item/storage/belt/gun/smartgunner/marsoc/full_low_threat/fill_preset_inventory()
+	handle_item_insertion(new /obj/item/weapon/gun/pistol/vp78/whiteout())
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+
+/obj/item/storage/belt/gun/smartgunner/clf/full_alt/fill_preset_inventory()
+	handle_item_insertion(new /obj/item/weapon/gun/revolver/mateba())
+	new /obj/item/ammo_magazine/revolver/mateba/highimpact(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+	new /obj/item/ammo_magazine/smartgun(src)
+
 /obj/item/storage/belt/gun/smartgunner
 	name = "\improper M802 pattern smartgunner sidearm rig"
 	desc = "The M802 is a special-issue load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is for the M56B smartgun, allowing easier storage of the weapon's sidearm and ammunition."
