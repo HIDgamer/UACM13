@@ -1062,7 +1062,7 @@ L54 service pistol
 	fire_sound = 'sound/weapons/gun_vp78_v2.ogg'
 	reload_sound = 'sound/weapons/gun_vp78_reload.ogg'
 	unload_sound = 'sound/weapons/gun_vp78_unload.ogg'
-	current_mag = /obj/item/ammo_magazine/pistol/l54
+	current_mag = /obj/item/ammo_magazine/pistol
 	flags_gun_features = GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED|GUN_SMOKE_PARTICLES
 	attachable_allowed = list(
 		/obj/item/attachable/suppressor,
@@ -1095,7 +1095,7 @@ L54 service pistol
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/TWE/pistols.dmi'
 	icon_state = "l54_custom"
 	item_state = "l54_custom"
-	current_mag = /obj/item/ammo_magazine/pistol/l54_custom
+	current_mag = /obj/item/ammo_magazine/pistol
 	attachable_allowed = list(
 		/obj/item/attachable/reddot,
 		/obj/item/attachable/reflex,

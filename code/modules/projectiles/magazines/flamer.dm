@@ -282,7 +282,7 @@
 	icon = 'icons/obj/items/weapons/guns/ammo_by_faction/WY/flamers.dmi'
 	icon_state = "fl3"
 	item_state = "fl3"
-	gun_type = /obj/item/weapon/gun/flamer/flammenwerfer3
+	gun_type = null
 	max_rounds = 300
 	max_range = 8
 	max_intensity = 70
