@@ -20,6 +20,11 @@
 	if(direction)
 		setDir(direction)
 
+	if(dir == SOUTH)
+		pixel_y = -7
+	else if(dir == NORTH)
+		pixel_y = 7
+
 	..(loc, user)
 
 	for(var/i = 1 to amount-1)
@@ -30,11 +35,6 @@
 
 /obj/structure/barricade/sandbags/update_icon()
 	..()
-
-	if(dir == SOUTH)
-		pixel_y = -7
-	else if(dir == NORTH)
-		pixel_y = 7
 
 	icon_state = "sandbag[build_stage]"
 	if(dir > 2)
