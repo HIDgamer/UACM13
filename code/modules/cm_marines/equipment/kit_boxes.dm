@@ -241,8 +241,6 @@
 
 /obj/item/storage/box/spec/mortar/fill_preset_inventory()
 	new /obj/item/mortar_kit(src)
-	new /obj/item/pamphlet/skill/mortar_operator(src)
-	new /obj/item/pamphlet/skill/mortar_operator(src)
 	new /obj/item/storage/belt/gun/mortarbelt(src)
 	new /obj/item/storage/belt/gun/mortarbelt(src)
 	new /obj/item/storage/backpack/marine/mortarpack(src)

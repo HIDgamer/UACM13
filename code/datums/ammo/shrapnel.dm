@@ -27,6 +27,12 @@
 		B.health -= rand(2, 5)
 		B.update_health(1)
 
+/datum/ammo/bullet/shrapnel/on_hit_mob(mob/living/carbon/xeno, obj/projectile/projectile, mob/user)
+	if(!shrapnel_chance) // no shrapnell , no special effects
+		return
+	if(isxeno(xeno))
+		xeno.apply_effect(4, SLOW) // multiple hits dont stack they just renew the duration
+		xeno.apply_armoured_damage(damage * 0.6, ARMOR_BULLET, BRUTE, , penetration) // xenos have a lot of HP
 
 /datum/ammo/bullet/shrapnel/rubber
 	name = "rubber pellets"
