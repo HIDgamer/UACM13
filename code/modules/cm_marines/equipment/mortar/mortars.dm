@@ -114,57 +114,20 @@
 	add_fingerprint(user)
 
 	if(computer_enabled)
-		if(lase_mode)
-			internal_camera.tgui_interact(user)
-		else
-			tgui_interact(user)
+		tgui_interact(user)
 	else
-		if(!lase_mode)
-			var/choice = tgui_alert(user, "Would you like to set the mortar's target coordinates, or dial the mortar? Setting coordinates will make you lose your fire adjustment.", "Mortar Dialing", list("Target", "Dial", "Cancel"))
-			if(choice == "Cancel")
-				return
-			if(choice == "Target")
-				handle_target(user, manual = TRUE)
-			if(choice == "Dial")
-				handle_dial(user, manual = TRUE)
+		var/choice = tgui_alert(user, "Would you like to set the mortar's target coordinates, or dial the mortar? Setting coordinates will make you lose your fire adjustment.", "Mortar Dialing", list("Target", "Dial", "Cancel"))
+		if(choice == "Cancel")
+			return
+		if(choice == "Target")
+			handle_target(user, manual = TRUE)
+		if(choice == "Dial")
+			handle_dial(user, manual = TRUE)
 
 /obj/structure/mortar/clicked(mob/user, list/mods)
 	. = ..()
-	if(mods["alt"] && user.Adjacent(src))
-		if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
-			toggle_lase_mode(user)
 
-/obj/structure/mortar/proc/toggle_lase_mode(mob/user)
-	lase_mode = !lase_mode
-	if(lase_mode)
-		to_chat(user, SPAN_NOTICE("You toggle the [src] to laser targeting mode."))
-		reset_dials()
-		if(linked_designator)
-			RegisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE, PROC_REF(retrieve_laser_target))
-			RegisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE_OFF, PROC_REF(lost_laser_target))
-	else
-		to_chat(user, SPAN_NOTICE("You toggle the [src] to coordinate targeting mode."))
-		if(aimed || aiming)
-			lost_laser_target()
-		if(linked_designator)
-			UnregisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE)
-			UnregisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE_OFF)
-		reset_dials()
-	playsound(src, "sound/machines/click.ogg", 15, 1)
 
-/obj/structure/mortar/proc/unlink_designator()
-	set name = "Unlink Designator"
-	set desc = "Unlinks a linked designator."
-	set category = "Object"
-	set src in oview(1)
-
-	aiming = FALSE
-	aimed = FALSE
-	UnregisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE)
-	UnregisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE_OFF)
-	linked_designator = null
-	verbs -= /obj/structure/mortar/proc/unlink_designator
-	balloon_alert(usr, "unlinked")
 
 /obj/structure/mortar/proc/reset_dials()
 	dial_x = 0
@@ -174,14 +137,7 @@
 
 /obj/structure/mortar/get_examine_text(mob/user)
 	. = ..()
-	if(linked_designator)
-		. += SPAN_NOTICE("It's currently linked to a laser designator with the [linked_designator.serial_number] serial number.")
-	if(lase_mode)
-		. += SPAN_NOTICE("It's in laser targeting mode.")
-		if(aimed)
-			. += SPAN_NOTICE("It's aimed on target and ready to fire!")
-	else
-		. += SPAN_NOTICE("It's in coordinate targeting mode.")
+	. += SPAN_NOTICE("It's in coordinate targeting mode.")
 
 /obj/structure/mortar/tgui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -252,43 +208,19 @@
 
 /obj/structure/mortar/proc/retrieve_laser_target()
 	SIGNAL_HANDLER
-	if(!lase_mode)
-		return
-	visible_message(SPAN_NOTICE("[icon2html(src, viewers(src))] The [src] has detected a target and beings calibrating..."))
-	aiming = TRUE
-	aimed = FALSE
-	playsound(loc, "sound/machines/scanning.ogg", 25, 1)
-	addtimer(CALLBACK(src, PROC_REF(set_laser_target)), 1.5 SECONDS)
-	busy_image_aim = image('icons/mob/do_afters.dmi', src, "busy_generic")
-	busy_image_aim.flick_overlay(src, 1.5 SECONDS)
+	// Removed laser targeting code
+	return
 
 /obj/structure/mortar/proc/lost_laser_target()
 	SIGNAL_HANDLER
-	if(!lase_mode)
-		return
-	visible_message(SPAN_NOTICE("[icon2html(src, viewers(src))] The [src] has lost the laser target and returns to it's normal position."))
-	aiming = FALSE
-	aimed = FALSE
-	playsound(loc, "sound/machines/scanning.ogg", 25, 1)
-	busy_image_aim = image('icons/mob/do_afters.dmi', src, "busy_build")
-	busy_image_aim.flick_overlay(src, 1 SECONDS)
+	// Removed laser targeting code
+	return
 
 /obj/structure/mortar/proc/set_laser_target()
-	if(!aiming) // If lase went down before mortar has aimed, we cancel
-		return
-	var/obj/effect/overlay/temp/laser_target = linked_designator.laser
-	if(!can_fire_at(null, laser_target.x, laser_target.y, laser_target.z, 0, 0))
-		aiming = FALSE
-		aimed = FALSE
-		return
-	visible_message(SPAN_NOTICE("[icon2html(src, viewers(src))] The [src] is ready to fire!"))
-	aiming = FALSE
-	aimed = TRUE
+	// Removed laser targeting code
+	return
 
 /obj/structure/mortar/proc/handle_dial(mob/user, temp_dial_x = 0, temp_dial_y = 0, manual = FALSE)
-	if(lase_mode)
-		user.visible_message(SPAN_WARNING("The [src] is set to laser targeting mode, switch to coordinate targeting in order to dial coordinates!"))
-		return
 	if(manual)
 		temp_dial_x = tgui_input_number(user, "Set longitude adjustement from -10 to 10.", "Longitude", 0, 10, -10)
 		temp_dial_y = tgui_input_number(user, "Set latitude adjustement from -10 to 10.", "Latitude", 0, 10, -10)
@@ -317,27 +249,6 @@
 	SStgui.update_uis(src)
 
 /obj/structure/mortar/attackby(obj/item/item, mob/user)
-	if(istype(item, /obj/item/device/binoculars/range/designator))
-		if(!skillcheck(user, SKILL_JTAC, SKILL_JTAC_TRAINED))
-			to_chat(user, SPAN_WARNING("You don't know how to link your laser designator to the [src]."))
-			return
-		if(!lase_mode)
-			to_chat(user, SPAN_WARNING("You need to switch the [src] to laser targeting before linking your laser designator!"))
-			return
-		if(aimed)
-			to_chat(user, SPAN_WARNING("The [src] is currently targeting something!"))
-			return
-		to_chat(user, SPAN_NOTICE("You begin linking your laser designator to the [src].."))
-		if(do_after(user, 2 SECONDS, INTERRUPT_ALL, BUSY_ICON_FRIENDLY))
-			if(linked_designator) // Unregister the previous laser designator signal, if switching linked laser designator
-				UnregisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE)
-				UnregisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE_OFF)
-			linked_designator = item
-			RegisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE, PROC_REF(retrieve_laser_target))
-			RegisterSignal(linked_designator, COMSIG_DESIGNATOR_LASE_OFF, PROC_REF(lost_laser_target))
-			verbs += /obj/structure/mortar/proc/unlink_designator
-			balloon_alert(user, "linked")
-		return
 
 	if(istype(item, /obj/item/mortar_shell))
 		var/obj/item/mortar_shell/mortar_shell = item
@@ -351,7 +262,7 @@
 			return
 		if(!ship_side)
 			if(targ_x == 0 && targ_y == 0) //Mortar wasn't set
-				to_chat(user, SPAN_WARNING("[src] needs to be aimed first."))
+				to_chat(user, SPAN_WARNING("[src] needs to be targeted first."))
 				return
 			if(!target_turf)
 				to_chat(user, SPAN_WARNING("You cannot fire [src] to this target."))
@@ -377,7 +288,7 @@
 				return
 		else
 			var/turf/deviation_turf = locate(target_turf.x + pick(-1,0,0,1), target_turf.y + pick(-1,0,0,1), target_turf.z) //Small amount of spread so that consecutive mortar shells don't all land on the same tile
-			if(deviation_turf && !lase_mode) // Mortar is accurate in lase mode
+			if(deviation_turf) // Mortar is always accurate now
 				target_turf = deviation_turf
 
 		user.visible_message(SPAN_NOTICE("[user] starts loading \a [mortar_shell.name] into [src]."),
@@ -449,8 +360,6 @@
 				SPAN_NOTICE("You undeploy [src]."))
 			playsound(loc, 'sound/items/Deconstruct.ogg', 25, 1)
 			var/obj/item/mortar_kit/mortar = new /obj/item/mortar_kit(loc)
-			if(linked_designator)
-				mortar.linked_designator = linked_designator
 			mortar.name = src.name
 			qdel(src)
 
@@ -508,8 +417,7 @@
 			SPAN_HIGHDANGER("A SHELL IS ABOUT TO IMPACT [SPAN_UNDERLINE(relative_dir ? uppertext(("TO YOUR " + dir2text(relative_dir))) : uppertext("right above you"))]!"), SHOW_MESSAGE_VISIBLE, \
 			SPAN_HIGHDANGER("YOU HEAR SOMETHING VERY CLOSE COMING DOWN [SPAN_UNDERLINE(relative_dir ? uppertext(("TO YOUR " + dir2text(relative_dir))) : uppertext("right above you"))]!"), SHOW_MESSAGE_AUDIBLE \
 		)
-	if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/mortar_laser_warning))
-		new /obj/effect/overlay/temp/blinking_laser(target)
+	// Removed laser warning code
 	sleep(2 SECONDS) // Wait out the rest of the landing time
 	target.ceiling_debris_check(2)
 	if(!protected_by_pylon(TURF_PROTECTION_MORTAR, target))
@@ -525,10 +433,10 @@
 		attempt_info = SPAN_WARNING(("[user ? "You" : "The [src]"] cannot aim the mortar while on a ship."))
 		can_fire = FALSE
 	if(test_dial_x + test_targ_x > world.maxx || test_dial_x + test_targ_x < 0)
-		attempt_info = SPAN_WARNING("[user ? "You" : "The [src]"] cannot [dialing ? "dial to" : "aim at"] this [lase_mode ? "target" : "coordinate"], it is outside of the area of operations.")
+		attempt_info = SPAN_WARNING("[user ? "You" : "The [src]"] cannot [dialing ? "dial to" : "aim at"] this coordinate, it is outside of the area of operations.")
 		can_fire = FALSE
 	if(test_dial_x < -10 || test_dial_x > 10 || test_dial_y < -10 || test_dial_y > 10)
-		attempt_info = SPAN_WARNING("[user ? "You" : "The [src]"] cannot [dialing ? "dial to" : "aim at"] this [lase_mode ? "target" : "coordinate"], it is too far away from the original target.")
+		attempt_info = SPAN_WARNING("[user ? "You" : "The [src]"] cannot [dialing ? "dial to" : "aim at"] this coordinate, it is too far away from the original target.")
 		can_fire = FALSE
 	if(test_dial_y + test_targ_y > world.maxy || test_dial_y + test_targ_y < 0)
 		to_chat(user, SPAN_WARNING("You cannot [dialing ? "dial to" : "aim at"] this coordinate, it is outside of the area of operations."))
@@ -569,8 +477,6 @@
 	unacidable = TRUE
 	w_class = SIZE_HUGE //No dumping this in a backpack. Carry it, fatso
 	flags_atom = FPRINT|CONDUCT|MAP_COLOR_INDEX
-	/// Linked designator, keeping track of it on undeploy so we don't have to relink it everytime.
-	var/obj/item/device/binoculars/range/designator/linked_designator
 
 /obj/item/mortar_kit/Initialize(...)
 	. = ..()
@@ -598,8 +504,6 @@
 	playsound(deploy_turf, 'sound/items/Deconstruct.ogg', 25, 1)
 	if(do_after(user, 4 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 		var/obj/structure/mortar/mortar = new /obj/structure/mortar(deploy_turf)
-		if(linked_designator)
-			mortar.linked_designator = linked_designator
 		if(!is_ground_level(deploy_turf.z))
 			mortar.ship_side = TRUE
 			user.visible_message(SPAN_NOTICE("[user] deploys [src]."),
