@@ -98,16 +98,11 @@
 /obj/structure/sign/double/maltesefalcon/right
 	icon_state = "maltesefalcon-right"
 
-/obj/structure/sign/uacqs
-	name = "\improper UACQS Plaque"
-	desc = "a UACQS sign"
-	icon_state = "roplaque"
-	deconstructable = FALSE
-
-/obj/structure/sign/uacqs/New(loc, ...)
-	. = ..()
-	desc = "1) These premises are under the operation of the United Americas Commission for Quality and Standards.<br>2) Access to these premises are regulated by UACQS personnel, or the regulating authority of the region.<br>[SPAN_RED("3) In accordance with Civil Law, firearms are not permitted in these premises.")]"
-
+/obj/structure/sign/poster/gramps
+	name = "Re-enlistment Poster"
+	desc = "A faded USCM internal propaganda poster. 'Re-enlist today! Your Corps needs you, any age, any condition!'. You recognize the grey old Devil Dog in the photo."
+	icon = 'icons/obj/structures/props/wall_decorations/decals.dmi'
+	icon_state = "bravoposter"
 //============//
 //  Banners  //
 //==========//
