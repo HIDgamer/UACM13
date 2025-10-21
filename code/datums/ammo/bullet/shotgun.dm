@@ -6,6 +6,7 @@
 
 /datum/ammo/bullet/shotgun
 	headshot_state = HEADSHOT_OVERLAY_HEAVY
+	shell_casing = /obj/effect/decal/ammo_casing/shell/red_shell // safe to assume that most shotguns will have a casing
 
 /datum/ammo/bullet/shotgun/setup_faction_clash_values()
 	. = ..()
@@ -23,6 +24,7 @@
 	accuracy = HIT_ACCURACY_TIER_3
 	damage_armor_punch = 2
 	handful_state = "slug_shell"
+	shell_casing = /obj/effect/decal/ammo_casing/shell/green_shell
 
 /datum/ammo/bullet/shotgun/slug/on_hit_mob(mob/M,obj/projectile/P)
 	knockback(M, P, 6)
@@ -69,6 +71,8 @@
 	accuracy = HIT_ACCURACY_TIER_3
 	shell_speed = AMMO_SPEED_TIER_3
 	handful_state = "beanbag_slug"
+	bullet_duraloss = BULLET_DURABILITY_LOSS_SMALL_RUBBER // while not rubber, it's still a soft projectile and sometimes shit can get stuck on the barrel, probably
+	shell_casing = /obj/effect/decal/ammo_casing/shell/blue_shell
 
 /datum/ammo/bullet/shotgun/beanbag/on_hit_mob(mob/M, obj/projectile/P)
 	if(!M || M == P.firer)
@@ -151,6 +155,9 @@
 	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_3
 	handful_state = "flechette_shell"
 	multiple_handful_name = TRUE
+	bullet_duraloss = BULLET_DURABILITY_LOSS_LOW //dart shaped projectiles and friction to a barrel doesnt bode well
+	bullet_duramage = BULLET_DURABILITY_DAMAGE_FAIR
+	shell_casing = /obj/effect/decal/ammo_casing/shell/blue_shell
 
 /datum/ammo/bullet/shotgun/flechette/setup_faction_clash_values()
 	. = ..()
@@ -300,6 +307,8 @@
 	damage = 90 //ouch.
 	penetration = ARMOR_PENETRATION_TIER_6
 	damage_armor_punch = 2
+	bullet_duramage = BULLET_DURABILITY_DAMAGE_INSUBSTANTIAL
+	shell_casing = /obj/effect/decal/ammo_casing/shell/green_shell
 
 /datum/ammo/bullet/shotgun/heavy/slug/on_hit_mob(mob/M,obj/projectile/P)
 	knockback(M, P, 7)
@@ -333,6 +342,9 @@
 	stamina_damage = 100
 	accuracy = HIT_ACCURACY_TIER_2
 	shell_speed = AMMO_SPEED_TIER_2
+	bullet_duraloss = BULLET_DURABILITY_LOSS_SMALL_RUBBER // while not rubber, it's still a soft projectile and sometimes shit can get stuck on the barrel, probably
+	bullet_duramage = BULLET_DURABILITY_DAMAGE_LOW // we also reflect this here, kinda
+	shell_casing = /obj/effect/decal/ammo_casing/shell/blue_shell
 
 /datum/ammo/bullet/shotgun/heavy/beanbag/on_hit_mob(mob/M, obj/projectile/P)
 	if(!M || M == P.firer)
@@ -356,6 +368,9 @@
 	damage_var_high = PROJECTILE_VARIANCE_TIER_8
 	penetration = ARMOR_PENETRATION_TIER_10
 	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_2
+	bullet_duraloss = BULLET_DURABILITY_LOSS_LOW //dart shaped projectiles and friction to a barrel doesnt bode well
+	bullet_duramage = BULLET_DURABILITY_DAMAGE_MEDIUM
+	shell_casing = /obj/effect/decal/ammo_casing/shell/blue_shell
 
 /datum/ammo/bullet/shotgun/heavy/flechette/setup_faction_clash_values()
 	. = ..()

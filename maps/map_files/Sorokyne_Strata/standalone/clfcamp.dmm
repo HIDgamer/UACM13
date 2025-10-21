@@ -31,19 +31,14 @@
 /area/strata/exterior/far_north_outpost)
 "af" = (
 /obj/effect/landmark/survivor_spawner/clf/soro,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/strata/exterior/far_north_outpost)
 "ag" = (
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/weapon/twohanded/folded_metal_chair{
-	pixel_x = 3;
-	pixel_y = 9
-	},
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/strata/exterior/far_north_outpost)
 "ah" = (
@@ -1957,21 +1952,19 @@
 /turf/open/auto_turf/strata_grass/layer1,
 /area/strata/exterior/far_north_outpost)
 "Ib" = (
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
 /obj/structure/barricade/sandbags{
-	dir = 8;
-	color = "#a98c7c"
+	dir = 8
 	},
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/strata/exterior/far_north_outpost)
 "It" = (
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
-/obj/item/ammo_casing,
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
+/obj/effect/decal/ammo_casing,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/strata/exterior/far_north_outpost)
 "Ix" = (
@@ -2383,11 +2376,8 @@
 /obj/structure/barricade/sandbags{
 	color = "#a98c7c"
 	},
-/obj/item/ammo_casing,
-/obj/structure/barricade/sandbags{
-	dir = 8;
-	color = "#a98c7c"
-	},
+/obj/structure/barricade/sandbags,
+/obj/effect/decal/ammo_casing,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/strata/exterior/far_north_outpost)
 "Wb" = (

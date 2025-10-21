@@ -218,7 +218,7 @@
 	///What attachments this gun starts with THAT CAN BE REMOVED. Important to avoid nuking the attachments on restocking! Added on New()
 	var/list/starting_attachment_types = null
 
-	var/flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK
+	var/flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AUTO_EJECT_CASINGS
 	///Only guns of the same category can be fired together while dualwielding.
 	var/gun_category
 
@@ -279,12 +279,26 @@
 	var/projectile_type = /obj/projectile
 	/// The multiplier for how much slower this should fire in automatic mode. 1 is normal, 1.2 is 20% slower, 2 is 100% slower, etc. Protected due to it never needing to be edited.
 	VAR_PROTECTED/autofire_slow_mult = 1
+	/// How many empty shell casings are in the gun?
+	var/empty_casings = 0
+	/// enables jamming code, default should be false, change the vars in parent gun or individually to enable jamming
+	var/can_jam = FALSE
+	/// if gun is currently jammed
+	var/jammed = FALSE
+	/// guns inherent chance to jam
+	var/initial_jam_chance = 0
+	/// threshold for when gun jamming starts, default 80 and ideally between 50-80, 0 disables it
+	var/jam_threshold = GUN_DURABILITY_HIGH
+	/// guns chance to jam after calculations
+	var/scaled_jam_chance = 0
+	/// chance to unjam after hitting the unique action
+	var/unjam_chance = 0
+	/// Amount of durability loss per shot, 0.05 by default, setting it to 0 will disable most calculations otherwise
+	var/durability_loss = GUN_DURABILITY_LOSS_DEFAULT
+	/// Durability of a gun that determines jam chance.
+	var/gun_durability = GUN_DURABILITY_MAX
 
-	/// Whether the weapon has expended it's "second wind" and lost its acid protection.
-	var/has_second_wind = TRUE
 
-	/// the icon for spinning the gun
-	var/temp_icon = null
 
 /**
  * An assoc list where the keys are fire delay group string defines
@@ -1316,6 +1330,10 @@ and you're good to go.
 
 	play_firing_sounds(projectile_to_fire, user)
 
+	empty_casings++
+	if(flags_gun_features & GUN_AUTO_EJECT_CASINGS)
+		eject_casing()
+
 	simulate_recoil(dual_wield, user, target)
 
 	//This is where the projectile leaves the barrel and deals with projectile code only.
@@ -2231,34 +2249,30 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		icon = spin_32
 
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(icon_reset)),(speed*loop_amount)-0.8, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+	addtimer(VARSET_CALLBACK(src, icon, current_icon), (speed*loop_amount)-0.8)
 
-/obj/item/weapon/gun/proc/icon_reset()
-	if(temp_icon)
-		icon = temp_icon
-	temp_icon = null
+/// For ejecting the spent casing from corresponding guns
+/obj/item/weapon/gun/proc/eject_casing()
+	if(empty_casings == 0)
+		return
+	if(!ammo)
+		return
+	if(ammo.shell_casing)
+		var/turf/ejection_turf = get_turf(src)
+		if(!ejection_turf)
+			return
 
-/obj/item/weapon/gun/ex_act(severity, explosion_direction)
-	var/msg = pick("is destroyed by the blast!", "is obliterated by the blast!", "shatters as the explosion engulfs it!", "disintegrates in the blast!", "perishes in the blast!", "is mangled into uselessness by the blast!")
-	explosion_throw(severity, explosion_direction)
-	switch(severity)
-		if(0 to EXPLOSION_THRESHOLD_LOW)
-			if(prob(5))
-				if(!explo_proof && !has_second_wind)
-					visible_message(SPAN_DANGER(SPAN_UNDERLINE("[src] [msg]")))
-					deconstruct(FALSE)
-				else
-					has_second_wind = FALSE
-					visible_message(SPAN_DANGER(SPAN_UNDERLINE("[src] barely survives the blast!")))
-		if(EXPLOSION_THRESHOLD_LOW to EXPLOSION_THRESHOLD_MEDIUM)
-			if(prob(50))
-				if(!explo_proof && !has_second_wind)
-					deconstruct(FALSE)
-					visible_message(SPAN_DANGER(SPAN_UNDERLINE("[src] [msg]")))
-				else
-					has_second_wind = FALSE
-					visible_message(SPAN_DANGER(SPAN_UNDERLINE("[src] barely survives the blast!")))
-		if(EXPLOSION_THRESHOLD_MEDIUM to INFINITY)
-			if(!explo_proof) // heavy explosions don't care if the weapon has it's protection left; else you'd get weird situations where OBs/yautja SD/etc leave damaged but working guns everywhere.
-				visible_message(SPAN_DANGER(SPAN_UNDERLINE("[src] [msg]")))
-				deconstruct(FALSE)
+		for(var/ejecting = 1 to empty_casings)
+			var/obj/effect/decal/ammo_casing/found_casings
+			for(var/obj/effect/decal/ammo_casing/casing in ejection_turf)
+				if(casing.type == ammo.shell_casing)
+					found_casings = casing
+					break
+			if(!found_casings)
+				found_casings = new ammo.shell_casing(ejection_turf)
+				found_casings.current_casings = 0
+
+			found_casings.current_casings += 1
+			found_casings.update_icon()
+
+	empty_casings = 0
