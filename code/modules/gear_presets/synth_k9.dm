@@ -20,10 +20,8 @@
 	. = ..()
 	new_human.h_style = "Bald"
 	new_human.f_style = "Shaved"
-	if(new_human.client?.prefs?.synthetic_type)
-		new_human.set_species(new_human.client.prefs.synthetic_type)
-		return
-	new_human.set_species(SYNTH_K9)
+	// K9 synthetics always spawn as the K9 species, ignoring player preferences
+	new_human.set_species(SPECIES_SYNTHETIC_K9)
 
 /datum/equipment_preset/synth_k9/load_name(mob/living/carbon/human/new_human, randomise)
 	var/final_name = "Rex"
@@ -36,3 +34,11 @@
 /datum/equipment_preset/synth_k9/load_skills(mob/living/carbon/human/new_human)
 	. = ..()
 	new_human.allow_gun_usage = FALSE
+
+/datum/equipment_preset/synth_k9/load_gear(mob/living/carbon/human/new_human)
+	// K9 synthetics don't need special gear as they are service units
+	// They come equipped with basic tools for rescue and recovery operations
+	new_human.equip_to_slot_or_del(new /obj/item/stack/medical/bruise_pack, WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new /obj/item/stack/medical/bruise_pack, WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new /obj/item/stack/medical/ointment, WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new /obj/item/stack/medical/ointment, WEAR_IN_BELT)
