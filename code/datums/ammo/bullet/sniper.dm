@@ -326,7 +326,7 @@
 	damage = 150
 	shell_speed = AMMO_SPEED_TIER_6 + AMMO_SPEED_TIER_2
 	penetration = ARMOR_PENETRATION_TIER_10 + ARMOR_PENETRATION_TIER_5
-	bullet_duraloss = BULLET_DURABILITY_LOSS_SPECIAL // if theres any chance this bullet is getting spawned in, its obviously getting some drawbacks
+	bullet_duraloss = BULLET_DURABILITY_LOSS_HIGH // if theres any chance this bullet is getting spawned in, its obviously getting some drawbacks
 	bullet_duramage = BULLET_DURABILITY_DAMAGE_SPECIAL
 	shell_casing = /obj/effect/decal/ammo_casing/cartridge
 

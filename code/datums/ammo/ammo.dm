@@ -97,6 +97,11 @@
 	/// Type of empty shell casing
 	var/shell_casing
 
+	/// Bullet durability loss multiplier (how much durability is lost when firing)
+	var/bullet_duraloss = 0
+	/// Bullet durability damage (how much durability damage is inflicted on the gun)
+	var/bullet_duramage = 0
+
 /datum/ammo/New()
 	set_bullet_traits()
 

@@ -77,6 +77,7 @@ It DOES NOT control where your bullets go, that's scatter and projectile varianc
 #define SCATTER_AMOUNT_TIER_8 3
 #define SCATTER_AMOUNT_TIER_9 2
 #define SCATTER_AMOUNT_TIER_10 1
+#define SCATTER_AMOUNT_TIER_10_5 1.5
 #define SCATTER_AMOUNT_NONE 0
 
 /*
@@ -162,11 +163,15 @@ As such, don't expect any values assigned to common firearms to even consider ho
 #define FIRE_DELAY_TIER_8 4
 #define FIRE_DELAY_TIER_9 3.5
 #define FIRE_DELAY_TIER_10 3
+#define FIRE_DELAY_TIER_10_25 3.25
 #define FIRE_DELAY_TIER_11 2.5
+#define FIRE_DELAY_TIER_11_25 2.75
 #define FIRE_DELAY_TIER_LMG 2
 #define FIRE_DELAY_TIER_SG 2
+#define FIRE_DELAY_TIER_SG_25 2.25
 #define FIRE_DELAY_TIER_SMG 1.5
 #define FIRE_DELAY_TIER_12 1
+#define FIRE_DELAY_TIER_1_12 13
 
 /*
 ////RANGE RELATED////
@@ -342,3 +347,30 @@ Fire Variant = Markers for special fire types that behave outside of chemfire co
 #define FIRE_VARIANT_TYPE_B 1
 // Lowers burn damage to humans
 #define HUMAN_BURN_DIVIDER 5
+
+/*
+////DURABILITY////
+*/
+
+// Bullet durability loss constants
+#define BULLET_DURABILITY_LOSS_INSIGNIFICANT 0.01
+#define BULLET_DURABILITY_LOSS_SMALL_RUBBER 0.02
+#define BULLET_DURABILITY_LOSS_LOW 0.05
+#define BULLET_DURABILITY_LOSS_MEDIUM 0.1
+#define BULLET_DURABILITY_LOSS_HIGH 0.2
+#define BULLET_DURABILITY_LOSS_EXTREME 0.5
+
+// Bullet durability damage constants
+#define BULLET_DURABILITY_DAMAGE_INSIGNIFICANT 1
+#define BULLET_DURABILITY_DAMAGE_FAIR 2
+#define BULLET_DURABILITY_DAMAGE_LOW 3
+#define BULLET_DURABILITY_DAMAGE_MEDIUM 5
+#define BULLET_DURABILITY_DAMAGE_HIGH 8
+#define BULLET_DURABILITY_DAMAGE_EXTREME 12
+#define BULLET_DURABILITY_DAMAGE_INSUBSTANTIAL 15
+#define BULLET_DURABILITY_DAMAGE_SPECIAL 20
+
+// Gun durability constants
+#define GUN_DURABILITY_HIGH 80
+#define GUN_DURABILITY_LOSS_DEFAULT 0.05
+#define GUN_DURABILITY_MAX 100

@@ -281,6 +281,10 @@
 	VAR_PROTECTED/autofire_slow_mult = 1
 	/// How many empty shell casings are in the gun?
 	var/empty_casings = 0
+	/// Temporary icon for animation effects
+	var/tmp/temp_icon
+	/// Current icon state for animation restoration
+	var/tmp/current_icon
 	/// enables jamming code, default should be false, change the vars in parent gun or individually to enable jamming
 	var/can_jam = FALSE
 	/// if gun is currently jammed
@@ -289,6 +293,8 @@
 	var/initial_jam_chance = 0
 	/// threshold for when gun jamming starts, default 80 and ideally between 50-80, 0 disables it
 	var/jam_threshold = GUN_DURABILITY_HIGH
+	/// whether gun can survive a significant attack (like acid)
+	var/has_second_wind = TRUE
 	/// guns chance to jam after calculations
 	var/scaled_jam_chance = 0
 	/// chance to unjam after hitting the unique action
@@ -297,8 +303,6 @@
 	var/durability_loss = GUN_DURABILITY_LOSS_DEFAULT
 	/// Durability of a gun that determines jam chance.
 	var/gun_durability = GUN_DURABILITY_MAX
-
-
 
 /**
  * An assoc list where the keys are fire delay group string defines
@@ -2249,7 +2253,11 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		icon = spin_32
 
 	. = ..()
-	addtimer(VARSET_CALLBACK(src, icon, current_icon), (speed*loop_amount)-0.8)
+	addtimer(CALLBACK(src, PROC_REF(icon_reset)),(speed*loop_amount)-0.8, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+
+/obj/item/weapon/gun/proc/icon_reset()
+	icon = temp_icon
+	temp_icon = null
 
 /// For ejecting the spent casing from corresponding guns
 /obj/item/weapon/gun/proc/eject_casing()

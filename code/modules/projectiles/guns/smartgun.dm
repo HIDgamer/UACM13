@@ -1008,7 +1008,6 @@
 		/obj/item/attachable/cosmetic/clf_sling,
 	)
 	gun_faction = FACTION_CLF
-	var/jammed = FALSE
 
 /obj/item/weapon/gun/smartgun/clf/set_gun_config_values()
 	..()

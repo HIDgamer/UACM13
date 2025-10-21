@@ -51,7 +51,7 @@ their unique feature is that a direct hit will buff your damage and firerate
 
 /obj/item/weapon/gun/lever_action/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_1 + FIRE_DELAY_TIER_12)
+	set_fire_delay(FIRE_DELAY_TIER_1_12)
 	lever_delay = FIRE_DELAY_TIER_3
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_5
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
@@ -142,7 +142,7 @@ their unique feature is that a direct hit will buff your damage and firerate
 	cur_onehand_chance = initial(cur_onehand_chance)
 	//these are init configs and so cannot be initial()
 	lever_delay = FIRE_DELAY_TIER_3
-	set_fire_delay(FIRE_DELAY_TIER_1)
+	set_fire_delay(FIRE_DELAY_TIER_1_12)
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 	recalculate_attachment_bonuses() //stock wield delay
 	if(one_hand_lever)
