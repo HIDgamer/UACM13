@@ -51,6 +51,7 @@
 > Firstly, you need to install [BYOND](https://www.byond.com/download/), and run the `bin/server.cmd` file to start the server.
 > You can learn more in our [Installation Guide](tools/build/README.md). **Building colonialmarines in DreamMaker directly is now deprecated and will cause errors.**
 
+UACM-13 is a derivative of [CM-SS13](https://github.com/cmss13-devs/cmss13).
 UACM13 is a game based on [Space Station 13](https://spacestation13.com), made in [BYOND](https://www.byond.com). UACM13 has wildly adapted the SS13 model into a strategic roleplay-based team deathmatch game.
 
 # Useful Links
