@@ -3,6 +3,7 @@
 	name = SPECIES_SYNTHETIC_K9
 
 	slowdown = -1.75 //Faster than Human run, slower than rooney run
+	shoes_affect_speed = FALSE // Boots don't affect speed, preventing the mega speed boost when wearing boots
 
 	icobase = 'icons/mob/humans/species/synth_k9/r_k9.dmi'
 	deform = 'icons/mob/humans/species/synth_k9/r_k9.dmi'

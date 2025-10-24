@@ -21,6 +21,7 @@
 	var/datum/unarmed_attack/unarmed    // For empty hand harm-intent attack
 	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.
 	var/slowdown = 0
+	var/shoes_affect_speed = TRUE // Whether wearing shoes affects movement speed
 	var/gluttonous // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1  // Relative rarity/collector value for this species. Only used by ninja and cultists atm.
 	var/unarmed_type =    /datum/unarmed_attack

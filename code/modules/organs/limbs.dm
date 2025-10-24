@@ -97,10 +97,10 @@
 	if(mob_owner)
 		owner = mob_owner
 
-	wound_overlay = image('icons/mob/humans/dam_human.dmi', "grayscale_0", -DAMAGE_LAYER)
+	wound_overlay = image('icons/mob/humans/dam_human.dmi', "grayscale_0", DAMAGE_LAYER)
 	wound_overlay.color = owner?.species.blood_color
 
-	burn_overlay = image('icons/mob/humans/dam_human.dmi', "burn_0", -DAMAGE_LAYER)
+	burn_overlay = image('icons/mob/humans/dam_human.dmi', "burn_0", DAMAGE_LAYER)
 
 	if(owner)
 		forceMove(owner)
@@ -1292,13 +1292,21 @@ treat_grafted var tells it to apply to grafted but unsalved wounds, for burn kit
 	damage_state = damage_state_text()
 	var/brutestate = copytext(damage_state, 1, 2)
 	if(brutestate != "0")
-		wound_overlay.icon_state = "grayscale_[icon_name]_[brutestate]"
+		if(owner.species.blood_mask && owner.species.name == SPECIES_SYNTHETIC_K9)
+			wound_overlay.icon = owner.species.blood_mask
+			wound_overlay.icon_state = "wound_[brutestate]"
+		else
+			wound_overlay.icon_state = "grayscale_[icon_name]_[brutestate]"
 		. += wound_overlay
 
 	var/burnstate = copytext(damage_state, 2)
 	if(burnstate != "0")
-		burn_overlay.icon_state = "burn_[icon_name]_[burnstate]"
-		. += wound_overlay
+		if(owner.species.blood_mask && owner.species.name == SPECIES_SYNTHETIC_K9)
+			burn_overlay.icon = owner.species.blood_mask
+			burn_overlay.icon_state = "wound_[burnstate]"
+		else
+			burn_overlay.icon_state = "burn_[icon_name]_[burnstate]"
+		. += burn_overlay
 
 /*
 			LIMB TYPES

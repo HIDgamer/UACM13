@@ -30,7 +30,7 @@
 			else if(E.status & LIMB_BROKEN)
 				. += MOVE_REDUCTION_LIMB_BROKEN
 	else
-		if(shoes)
+		if(shoes && species.shoes_affect_speed)
 			. += shoes.slowdown
 
 		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg","chest","groin","head"))
