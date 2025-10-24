@@ -39,3 +39,35 @@
 	. = ..()
 	qdel(radar)
 	faction = null
+
+/// Override to always show overlays for head, feet, and mask slots
+/// This allows the K9 to wear those items and show their visuals
+/datum/species/synthetic/synth_k9/should_show_overlay(slot)
+	switch(slot)
+		if(WEAR_HEAD, WEAR_FEET, WEAR_FACE)
+			return TRUE
+		else
+			return ..()
+
+/// Modify overlays for specific slots to use K9-specific icon states
+/// Head slot gets beret_k9, feet slot gets boots_k9, face slot gets scarf_k9
+/datum/species/synthetic/synth_k9/modify_overlay(image/overlay, slot)
+	overlay.icon = 'icons/mob/humans/species/synth_k9/onmob/synth_k9_overlays.dmi'
+	switch(slot)
+		if(WEAR_HEAD)
+			overlay.icon_state = "beret_k9"
+		if(WEAR_FEET)
+			overlay.icon_state = "boots_k9"
+		if(WEAR_FACE)
+			overlay.icon_state = "scarf_k9"
+	return overlay
+
+/// Override to use K9-specific wound overlay icon states
+/// Uses the species blood_mask for the icon
+/datum/species/synthetic/synth_k9/get_wound_overlay_icon_state(icon_name, state)
+	return "wound_[state]"
+
+/// Override to use K9-specific burn overlay icon states
+/// Uses the species blood_mask for the icon
+/datum/species/synthetic/synth_k9/get_burn_overlay_icon_state(icon_name, state)
+	return "wound_[state]"

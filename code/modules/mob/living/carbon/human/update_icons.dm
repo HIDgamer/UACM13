@@ -431,7 +431,7 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 			wear_l_ear?.screen_loc = hud_used.ui_datum.hud_slot_offset(wear_l_ear, hud_used.ui_datum.ui_wear_l_ear)
 			wear_r_ear?.screen_loc = hud_used.ui_datum.hud_slot_offset(wear_r_ear, hud_used.ui_datum.ui_wear_r_ear)
 
-		if(species.flags & NO_OVERLAYS && species.name != SPECIES_SYNTHETIC_K9)
+		if(species.flags & NO_OVERLAYS)
 			return
 
 		var/image/standing_image = image('icons/mob/humans/onmob/med_human.dmi', icon_state = "blank", layer = -EARS_LAYER)
@@ -452,14 +452,12 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 			client.add_to_screen(shoes)
 			shoes.screen_loc = hud_used.ui_datum.hud_slot_offset(shoes, hud_used.ui_datum.ui_shoes)
 
-		if(species.flags & NO_OVERLAYS && !shoes.force_overlays_on && species.name != SPECIES_SYNTHETIC_K9)
+		if(species.flags & NO_OVERLAYS && !shoes.force_overlays_on && !species.should_show_overlay(WEAR_FEET))
 			return
 
 		if(!((wear_suit && wear_suit.flags_inv_hide & HIDESHOES) || (w_uniform && w_uniform.flags_inv_hide & HIDESHOES)))
 			I =  shoes.get_mob_overlay(src, WEAR_FEET)
-			if(species.name == SPECIES_SYNTHETIC_K9)
-				I.icon = 'icons/mob/humans/species/synth_k9/onmob/synth_k9_overlays.dmi'
-				I.icon_state = "boots_k9"
+			I = species.modify_overlay(I, WEAR_FEET)
 
 	else if(feet_blood_color && species.blood_mask)
 		I = overlay_image(species.blood_mask, "feet_blood", feet_blood_color, RESET_COLOR)
@@ -498,13 +496,11 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 		client.add_to_screen(head)
 		head.screen_loc = hud_used.ui_datum.hud_slot_offset(head, hud_used.ui_datum.ui_head)
 
-	if(species.flags & NO_OVERLAYS && !head.force_overlays_on && species.name != SPECIES_SYNTHETIC_K9)
+	if(species.flags & NO_OVERLAYS && !head.force_overlays_on && !species.should_show_overlay(WEAR_HEAD))
 		return
 
 	var/image/head_overlay = head.get_mob_overlay(src, WEAR_HEAD)
-	if(species.name == SPECIES_SYNTHETIC_K9)
-		head_overlay.icon = 'icons/mob/humans/species/synth_k9/onmob/synth_k9_overlays.dmi'
-		head_overlay.icon_state = "beret_k9"
+	head_overlay = species.modify_overlay(head_overlay, WEAR_HEAD)
 	head_overlay.layer = -HEAD_LAYER
 	overlays_standing[HEAD_LAYER] = head_overlay
 	apply_overlay(HEAD_LAYER)
@@ -621,7 +617,7 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 	if(!(client && hud_used && hud_used.hud_shown && hud_used.ui_datum))
 		return
 
-	if(species.flags & NO_OVERLAYS && species.name != SPECIES_SYNTHETIC_K9)
+	if(species.flags & NO_OVERLAYS)
 		return
 
 	if(l_store)
@@ -640,16 +636,14 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 		client.add_to_screen(wear_mask)
 		wear_mask.screen_loc = hud_used.ui_datum.hud_slot_offset(wear_mask, hud_used.ui_datum.ui_mask)
 
-	if(species.flags & NO_OVERLAYS && !wear_mask.force_overlays_on && species.name != SPECIES_SYNTHETIC_K9)
+	if(species.flags & NO_OVERLAYS && !wear_mask.force_overlays_on && !species.should_show_overlay(WEAR_FACE))
 		return
 
 	if(!(head && head.flags_inv_hide & HIDEMASK))
-		var/image/I = wear_mask.get_mob_overlay(src, WEAR_FACE)
-		if(species.name == SPECIES_SYNTHETIC_K9)
-			I.icon = 'icons/mob/humans/species/synth_k9/onmob/synth_k9_overlays.dmi'
-			I.icon_state = "scarf_k9"
-		I.layer = -FACEMASK_LAYER
-		overlays_standing[FACEMASK_LAYER] = I
+		var/image/overlay_image = wear_mask.get_mob_overlay(src, WEAR_FACE)
+		overlay_image = species.modify_overlay(overlay_image, WEAR_FACE)
+		overlay_image.layer = -FACEMASK_LAYER
+		overlays_standing[FACEMASK_LAYER] = overlay_image
 		apply_overlay(FACEMASK_LAYER)
 
 /mob/living/carbon/human/update_inv_back()
