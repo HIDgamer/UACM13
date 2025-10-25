@@ -21,6 +21,7 @@
 	var/datum/unarmed_attack/unarmed    // For empty hand harm-intent attack
 	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.
 	var/slowdown = 0
+	var/shoes_affect_speed = TRUE // Whether wearing shoes affects movement speed
 	var/gluttonous // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1  // Relative rarity/collector value for this species. Only used by ninja and cultists atm.
 	var/unarmed_type =    /datum/unarmed_attack
@@ -500,14 +501,14 @@
 	// heebie-jebies made me do all this effort, I HATE YOU
 	return
 
-/datum/species/proc/handle_blood_splatter(mob/living/carbon/human/human, angle)
+/datum/species/proc/handle_blood_splatter(mob/living/carbon/human/human, splatter_dir)
 	var/color_override
 	if(human.special_blood)
 		var/datum/reagent/D = GLOB.chemical_reagents_list[human.special_blood]
 		if(D)
 			color_override = D.color
 
-	var/obj/effect/temp_visual/dir_setting/bloodsplatter/bloodsplatter = new bloodsplatter_type(human.loc, angle, 5, color_override)
+	var/obj/effect/temp_visual/dir_setting/bloodsplatter/bloodsplatter = new bloodsplatter_type(human.loc, splatter_dir, 5, color_override)
 	return bloodsplatter
 
 /datum/species/proc/get_status_tab_items()
@@ -518,3 +519,31 @@
 
 /datum/species/proc/handle_paygrades(paygrade, size, gender)
 	return get_paygrades(paygrade, size, gender)
+
+/// Determines if this species should show overlays for a given slot
+/// Used to control whether equipment overlays are displayed
+/// @param slot The slot to check (e.g., WEAR_HEAD, WEAR_FEET, WEAR_FACE)
+/datum/species/proc/should_show_overlay(slot)
+	return TRUE
+
+/// Modifies an overlay for this species
+/// Can be overridden to change icon/icon_state/color for species-specific visuals
+/// @param overlay The image to modify
+/// @param slot The slot this overlay belongs to
+/// @return The modified overlay image
+/datum/species/proc/modify_overlay(image/overlay, slot)
+	return overlay
+
+/// Returns the icon_state for wound overlays on this species
+/// @param icon_name The base icon name for the limb
+/// @param state The damage state (e.g., "1", "2", "3")
+/// @return The appropriate icon_state string for wound overlays
+/datum/species/proc/get_wound_overlay_icon_state(icon_name, state)
+	return "grayscale_[icon_name]_[state]"
+
+/// Returns the icon_state for burn overlays on this species
+/// @param icon_name The base icon name for the limb
+/// @param state The damage state (e.g., "1", "2", "3")
+/// @return The appropriate icon_state string for burn overlays
+/datum/species/proc/get_burn_overlay_icon_state(icon_name, state)
+	return "burn_[icon_name]_[state]"

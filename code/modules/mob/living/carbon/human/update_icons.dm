@@ -452,11 +452,12 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 			client.add_to_screen(shoes)
 			shoes.screen_loc = hud_used.ui_datum.hud_slot_offset(shoes, hud_used.ui_datum.ui_shoes)
 
-		if(species.flags & NO_OVERLAYS && !shoes.force_overlays_on)
+		if(species.flags & NO_OVERLAYS && !shoes.force_overlays_on && !species.should_show_overlay(WEAR_FEET))
 			return
 
 		if(!((wear_suit && wear_suit.flags_inv_hide & HIDESHOES) || (w_uniform && w_uniform.flags_inv_hide & HIDESHOES)))
 			I =  shoes.get_mob_overlay(src, WEAR_FEET)
+			I = species.modify_overlay(I, WEAR_FEET)
 
 	else if(feet_blood_color && species.blood_mask)
 		I = overlay_image(species.blood_mask, "feet_blood", feet_blood_color, RESET_COLOR)
@@ -495,10 +496,11 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 		client.add_to_screen(head)
 		head.screen_loc = hud_used.ui_datum.hud_slot_offset(head, hud_used.ui_datum.ui_head)
 
-	if(species.flags & NO_OVERLAYS && !head.force_overlays_on)
+	if(species.flags & NO_OVERLAYS && !head.force_overlays_on && !species.should_show_overlay(WEAR_HEAD))
 		return
 
 	var/image/head_overlay = head.get_mob_overlay(src, WEAR_HEAD)
+	head_overlay = species.modify_overlay(head_overlay, WEAR_HEAD)
 	head_overlay.layer = -HEAD_LAYER
 	overlays_standing[HEAD_LAYER] = head_overlay
 	apply_overlay(HEAD_LAYER)
@@ -634,13 +636,14 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 		client.add_to_screen(wear_mask)
 		wear_mask.screen_loc = hud_used.ui_datum.hud_slot_offset(wear_mask, hud_used.ui_datum.ui_mask)
 
-	if(species.flags & NO_OVERLAYS && !wear_mask.force_overlays_on)
+	if(species.flags & NO_OVERLAYS && !wear_mask.force_overlays_on && !species.should_show_overlay(WEAR_FACE))
 		return
 
 	if(!(head && head.flags_inv_hide & HIDEMASK))
-		var/image/I = wear_mask.get_mob_overlay(src, WEAR_FACE)
-		I.layer = -FACEMASK_LAYER
-		overlays_standing[FACEMASK_LAYER] = I
+		var/image/overlay_image = wear_mask.get_mob_overlay(src, WEAR_FACE)
+		overlay_image = species.modify_overlay(overlay_image, WEAR_FACE)
+		overlay_image.layer = -FACEMASK_LAYER
+		overlays_standing[FACEMASK_LAYER] = overlay_image
 		apply_overlay(FACEMASK_LAYER)
 
 /mob/living/carbon/human/update_inv_back()

@@ -10,7 +10,7 @@
 	flags_whitelist = WHITELIST_SYNTHETIC
 	gear_preset = /datum/equipment_preset/synth_k9
 	loadout_points = 120
-	entry_message_body = "You are a <a href='"+WIKI_PLACEHOLDER+"'>K9 Synthetic Unit!</a> Built for rescue and recovery operations, your purpose is to locate, assist, and safeguard USCM personnel in the field. You must follow all Server Rules, Marine Law, and Synthetic Regulations — failure to do so may result in White-list Removal. As a Synthetic, you possess advanced knowledge across multiple disciplines and are expected to maintain calm and professionalism at all times. While you may exhibit canine mannerisms, remember that your actions reflect the standards expected of all synthetics. You answer to the acting commanding officer unless mission circumstances require otherwise."
+	entry_message_body = "You are a <a href='"+WIKI_PLACEHOLDER+"'>K9 Synthetic Unit!</a> Built for rescue and recovery operations, your purpose is to locate, assist, and safeguard USCM personnel in the field. You must follow all Server Rules, Marine Law, and Synthetic Regulations — failure to do so may result in White-list Removal. As a Synthetic, you possess advanced knowledge across multiple disciplines and are expected to maintain calm and professionalism at all times. While you may exhibit canine mannerisms, remember that your actions reflect the standards expected of all synthetics."
 
 /datum/job/civilian/k9_synthetic/New()
 	. = ..()
@@ -25,6 +25,11 @@
 	name = "Synthetic K9 late join"
 	icon_state = "late_join_misc"
 	job = JOB_SYNTH_K9
+
+/obj/effect/landmark/start/k9_synthetic
+	name = JOB_SYNTH_K9
+	icon_state = "syn_spawn"
+	job = /datum/job/civilian/k9_synthetic
 
 /datum/job/civilian/k9_synthetic/get_whitelist_status(client/player)
 	. = ..()
